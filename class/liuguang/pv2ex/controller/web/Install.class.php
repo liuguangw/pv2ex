@@ -14,7 +14,7 @@ use liuguang\mvc\Templatel;
 class Install extends BaseController {
 	public function indexAction() {
 		$urlHandler=$this->getApp()->getUrlHandler();
-		var_dump($urlHandler->getUrlData());exit();
+		//var_dump($urlHandler->getUrlData());exit();
 		$title = 'V2EX › 安装';
 		$cssList = array (
 				'/public/css/main.css',

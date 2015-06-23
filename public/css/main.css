@@ -7,6 +7,7 @@ html {
 body {
     padding: 0px;
     margin: 0px;
+	min-width: 1000px;
     font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 }
 /*列表样式*/
@@ -51,7 +52,7 @@ a:hover {
     width: 276px;
     height: 28px;
     background-size: 276px 28px;
-    background-image: url('/public/img/qbar_light-2x.png');
+    background-image: url(/public/img/qbar_light-2x.png);
     background-repeat: no-repeat;
     display: inline-block;
 }
@@ -110,7 +111,7 @@ a:hover {
 .top-logo{
 	width:94px;
 	height: 30px;
-	background-image: url("/public/img/logo-2x.png");
+	background-image: url(/public/img/logo-2x.png);
 	background-size: 94px 30px;
 	background-repeat: no-repeat;
 }
@@ -132,8 +133,8 @@ a.top:active {
 #Wrapper {
     text-align: center;
     background-color: #e2e2e2;
-    background-image: url("/public/img/shadow_light.png");
-    background-repeat: repeat-x;
+	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTE3MUZDMzc2OUQwMTFFMzg3RkNENUMxREE0MjcxMzciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTE3MUZDMzY2OUQwMTFFMzg3RkNENUMxREE0MjcxMzciIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNS4xIE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE2OUUxRDlFNkZGMTExRTFBQjBCODVFNEE2MzdFRDhGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkY1QTRERkEwNkZGMTExRTFBQjBCODVFNEE2MzdFRDhGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+5Xmx/AAAAF5JREFUeNrsztsJgFAMwNDWFyIiCOL+m1aXEOM1gfyfjIgzwOX9QQfudOBGB6504EIHznTgRAeOdOAgsHVgL1Dgy8BOoECBAp8FpkCBAj8MtObLqhIoUKDAPwMvAQYAhqcYrJBlYv8AAAAASUVORK5CYII=);
+	background-repeat: repeat-x;
 }
 /*底部*/
 #Bottom {
@@ -172,29 +173,27 @@ table.common-form tr>td:last-child{
     outline: none;
 }
 /*按钮*/
-.btn {
+.btn.btn-super {
     background-color: #fff;
     color: #333;
     text-shadow: 0px 1px 0px #fff;
     text-decoration: none;
     font-weight: bold;
     box-shadow: 0px 1px 0px rgba(66, 66, 77, 0.1);
-}
-.btn:hover {
-    background-color: #f9f9f9;
-	text-decoration: none;
-    border: 1px solid rgba(60,60,70,0.3);
-    cursor: pointer;
-}
-.btn-super {
-    background-image: url("/public/img/bg_blended_light.png");
+	/**/
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkUxN0ExOTc4NjlEMzExRTM4N0ZDRDVDMURBNDI3MTM3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkUxN0ExOTc5NjlEMzExRTM4N0ZDRDVDMURBNDI3MTM3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTE3QTE5NzY2OUQzMTFFMzg3RkNENUMxREE0MjcxMzciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTE3QTE5Nzc2OUQzMTFFMzg3RkNENUMxREE0MjcxMzciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz62/c9GAAAANElEQVR42mL8//8/AzUBEwOVwQg0kBGKqQZYRqaBTKMuHHwuHDVw1MBRA0cNHDWQgQEgwADYtQOUGn4MQAAAAABJRU5ErkJggg==);
     padding: 4px 15px 4px 15px;
     border: 1px solid rgba(80,80,90, 0.2);
     border-bottom-color: rgba(80,80,90, 0.35);
     border-radius: 3px;
     font-size: 12px;
     line-height: 12px;
-    outline: none;
+    outline: none;	
+}
+.btn.btn-super:hover {
+    background-color: #f9f9f9;
+    border: 1px solid rgba(60,60,70,0.3);
+    cursor: pointer;
 }
 /*表单提示、警告*/
 .msg{
