@@ -1,0 +1,151 @@
+<!--{include /inc/header.html}-->
+<body>
+	<div id="Top">
+		<div class="content">
+			<div style="padding-top: 6px;">
+				<table>
+					<tr>
+						<td><a href="/" name="top" title="way to explore" alt="logo">
+								<div class="top-logo"></div>
+						</a></td>
+						<td>
+							<div id="Search">
+								<form onsubmit="return dispatch()">
+									<div>
+										<input type="text" maxlength="40" name="q" id="q" value="" />
+									</div>
+								</form>
+							</div>
+						</td>
+						<td><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;<a
+							href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;<a
+							href="/signin" class="top">登录</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="Wrapper">
+		<div class="content">
+
+			<div id="Leftbar"></div>
+			<div id="Rightbar">
+				<div class="sep20"></div>
+				<div class="box">
+					<div class="cell">
+						<strong>V2EX = way to explore</strong>
+						<div class="sep5"></div>
+						<span class="fade">V2EX 是一个关于分享和探索的地方</span>
+					</div>
+					<div class="inner">
+						<div class="sep5"></div>
+						<div align="center">
+							<a href="/signup" class="btn btn-super">现在注册</a>
+							<div class="sep5"></div>
+							<div class="sep10"></div>
+							已注册用户请 &nbsp;<a href="/signin">登录</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="Main">
+				<div class="sep20"></div>
+				<div class="box">
+					<div class="header">
+						<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+						安装&nbsp;
+						<li class="fa fa-server"></li>
+					</div>
+					<div class="msg msg-common">填写下面的表单完成安装</div>
+					<div class="cell">
+						<form method="post" action="/signin">
+							<table class="common-form">
+								<tr>
+									<td>管理员用户名</td>
+									<td><input type="text" class="sl" name="username" value=""
+										autofocus="autofocus" autocorrect="off" spellcheck="false"
+										autocapitalize="off" placeholder="管理员用户名" /></td>
+								</tr>
+								<tr>
+									<td>管理员昵称</td>
+									<td><input type="text" class="sl" name="nickname" value=""
+										autocorrect="off" spellcheck="false" autocapitalize="off"
+										placeholder="管理员昵称" /></td>
+								</tr>
+								<tr>
+									<td>管理员密码</td>
+									<td><input type="password" class="sl" name="pass1"
+										value="" autocorrect="off" spellcheck="false"
+										autocapitalize="off" /></td>
+								</tr>
+								<tr>
+									<td>重复管理员密码</td>
+									<td><input type="password" class="sl" name="pass1"
+										value="" autocorrect="off" spellcheck="false"
+										autocapitalize="off" /></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td><input type="hidden" value="83989" name="once" /><input
+										type="submit" class="btn btn-super" value="执行安装" /></td>
+								</tr>
+							</table>
+
+							<input type="hidden" value="/" name="next" />
+
+						</form>
+					</div>
+					<!-- /end cell -->
+
+				</div>
+			</div>
+			<!-- /end main -->
+
+
+		</div>
+		<div class="clear-b"></div>
+		<div class="sep20"></div>
+	</div>
+	<div id="Bottom">
+		<div class="content">
+			<div class="inner">
+				<div class="sep10"></div>
+				<div class="fr">
+					<a href="https://www.digitalocean.com/?refcode=1b51f1a7651d"
+						target="_blank"><img src="/public/img/do.png" width="64"
+						border="0" alt="DigitalOcean" /></a>
+				</div>
+				<strong><a href="/about" class="dark" target="_self">关于</a>
+					&nbsp; <span class="snow">·</span> &nbsp; <a href="/faq"
+					class="dark" target="_self">FAQ</a> &nbsp; <span class="snow">·</span>
+					&nbsp; <a href="/p/7v9TEc53" class="dark" target="_self">API</a>
+					&nbsp; <span class="snow">·</span> &nbsp; <a href="/mission"
+					class="dark" target="_self">我们的愿景</a> &nbsp; <span class="snow">·</span>
+					&nbsp; <a href="/ip" class="dark" target="_self">IP 查询</a> &nbsp; <span
+					class="snow">·</span> &nbsp; <a href="https://workspace.v2ex.com/"
+					class="dark" target="_blank">工作空间</a> &nbsp; <span class="snow">·</span>
+					&nbsp; <a href="/advertise" class="dark" target="_self">广告投放</a>
+					&nbsp; <span class="snow">·</span> &nbsp; <a
+					href="http://livid.v2ex.com/" class="dark" target="_blank">博客</a>
+					&nbsp; <span class="snow">·</span> &nbsp; <a href="/start"
+					class="dark" target="_blank">上网首页</a> &nbsp; <span class="snow">·</span>
+					&nbsp; 1174 人在线</strong> &nbsp; <span class="fade">最高记录 1307</span>
+				<div class="sep20"></div>
+				创意工作者们的社区
+				<div class="sep5"></div>
+				Lovingly made by <b>OLIVIDA</b>
+				<div class="sep20"></div>
+				<span class="small fade">VERSION: 3.9.0 · 7ms · UTC 02:25 ·
+					PVG 10:25 · LAX 19:25 · JFK 22:25<br />♥ Do have faith in what
+					you're doing.
+				</span>
+				<div class="sep20"></div>
+				<span class="f12 gray"><a href="http://www.miibeian.gov.cn/"
+					target="_blank" rel="nofollow">沪ICP备15015613号-1</a></span>
+				<div class="sep10"></div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<!--{include /inc/footer.html}-->

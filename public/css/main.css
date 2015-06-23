@@ -1,0 +1,293 @@
+@CHARSET "UTF-8";
+html {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+}
+/*列表样式*/
+ul {
+    list-style: square;
+    margin: 1em 0px 1em 1em;
+    padding: 0px;
+}
+
+ul li, ol li {
+    padding: 0px;
+    margin: 0px;
+}
+
+ol {
+    margin: 1em 0px 0em 2em;
+    padding: 0px;
+}
+/*链接样式*/
+a:link, a:visited, a:active {
+    color: #778087;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+a:hover {
+    color: #4d5256;
+    text-decoration: underline;
+}
+/*顶部导航条*/
+#Top {
+    text-align: center;
+    background-color: #fff;
+    height: 44px;
+    font-size: 15px;
+    font-weight: 500;
+	/*background-size: 44px 44px;*/
+    border-bottom: 1px solid rgba(0, 0, 0, 0.22);
+}
+/*搜索框背景*/
+#Search div{
+    width: 276px;
+    height: 28px;
+    background-size: 276px 28px;
+    background-image: url('/public/img/qbar_light-2x.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+/*搜索框*/
+#q {
+    border: none;
+    width: 222px;
+    height: 26px;
+    margin: 0px 0px 2px 30px;
+    background-color: transparent;
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important;
+    font-size: 12px;
+    line-height: 16px;
+    outline: none;
+}
+/*内容主体部分*/
+.content {
+    width: 970px;
+    margin: 0px auto;
+}
+/*左中右*/
+#Leftbar {
+    width: 0px;
+    float: left;
+}
+#Main {
+    width: auto;
+    margin: 0px 290px 0px 0px;
+}
+#Rightbar {
+    width: 270px;
+    float: right;
+}
+/*导航条部分布局*/
+#Top table{
+	width:100%;
+    border-spacing: 0;
+}
+#Top tr>td{
+	padding: 0;
+}
+#Top tr>td:nth-child(1){
+	width:110px;
+	text-align: left;
+}
+#Top tr>td:nth-child(2){
+	width:auto;
+	text-align: left;
+}
+#Top tr>td:nth-child(3){
+	width:570px;
+	text-align: right;
+	padding-top: 2px;
+}
+/*logo*/
+.top-logo{
+	width:94px;
+	height: 30px;
+	background-image: url("/public/img/logo-2x.png");
+	background-size: 94px 30px;
+	background-repeat: no-repeat;
+}
+/*导航条右侧链接*/
+a.top:link, a.top:visited {
+    color: #556;
+    text-decoration: none;
+}
+
+a.top:hover {
+    color: #99a;
+    text-decoration: none;
+}
+
+a.top:active {
+    color: #001;
+    text-decoration: none;
+}
+#Wrapper {
+    text-align: center;
+    background-color: #e2e2e2;
+    background-image: url("/public/img/shadow_light.png");
+    background-repeat: repeat-x;
+}
+/*底部*/
+#Bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.22);
+    background-color: #fff;
+    text-align: center;
+    color: #999;
+}
+/*登录、注册、安装页面的表格*/
+table.common-form{
+	width:100%;
+    border-spacing: 0;	
+}
+table.common-form td{
+	padding:5px;
+}
+table.common-form tr>td:first-child{
+	width: 120px;
+	text-align: right;
+}
+table.common-form tr>td:last-child{
+	text-align: left;
+}
+/*输入框*/
+.sl {
+    border-radius: 3px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    width: 310px;
+}
+
+.sl:focus {
+    border: 1px solid rgba(82,168,236,0.8);
+	box-shadow: 0 0 8px rgba(82,168,236,0.6);
+    outline: none;
+}
+/*按钮*/
+.btn {
+    background-color: #fff;
+    color: #333;
+    text-shadow: 0px 1px 0px #fff;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0px 1px 0px rgba(66, 66, 77, 0.1);
+}
+.btn:hover {
+    background-color: #f9f9f9;
+	text-decoration: none;
+    border: 1px solid rgba(60,60,70,0.3);
+    cursor: pointer;
+}
+.btn-super {
+    background-image: url("/public/img/bg_blended_light.png");
+    padding: 4px 15px 4px 15px;
+    border: 1px solid rgba(80,80,90, 0.2);
+    border-bottom-color: rgba(80,80,90, 0.35);
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 12px;
+    outline: none;
+}
+/*表单提示、警告*/
+.msg{
+    padding: 10px;
+    font-size: 13px;
+    line-height: 120%;
+    text-align: left;
+    border-left: 5px solid #c7e8ff;
+    border-bottom: 1px solid #e2e2e2;
+    color: #333;	
+}
+.msg-common{
+    background-color: #f3faff;
+}
+.msg-problem {
+    background-color: #ffffc0;
+}
+/*清理浮动*/
+.clear-b {
+    clear: both;
+}
+/*区块*/
+.box {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e2e2e2;
+}
+/*间隔层*/
+.sep5 {
+    height: 5px;
+}
+.sep10 {
+    height: 10px;
+}
+.sep20 {
+    height: 20px;
+}
+/*标题区*/
+.header {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 120%;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+    overflow: auto;
+}
+.chevron {
+    font-family: "Lucida Grande";
+    font-weight: 500;
+}
+.cell {
+    padding: 10px;
+    font-size: 12px;
+    line-height: 120%;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+}
+.inner {
+    padding: 10px;
+    font-size: 12px;
+    line-height: 150%;
+    text-align: left;
+}
+/*空间图标*/
+.fr {
+    float: right;
+    text-align: right;
+}
+/*底部灰色链接*/
+a.dark:link, a.dark:visited, a.dark:active {
+    color: gray;
+    text-decoration: none;
+}
+
+a.dark:hover {
+    color: #385f8a;
+    text-decoration: none;
+}
+/*底部连接的点*/
+.snow {
+    color: #e2e2e2;
+}
+/*底部文字*/
+.small {
+    font-size: 11px;
+}
+.fade {
+    color: #ccc;
+}
+.f12 {
+    font-size: 12px;
+}
+.gray {
+    color: #999;
+}
