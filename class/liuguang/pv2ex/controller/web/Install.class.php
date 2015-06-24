@@ -3,6 +3,7 @@
 namespace liuguang\pv2ex\controller\web;
 
 use liuguang\pv2ex\model\BaseController;
+use liuguang\pv2ex\model\Install as InstallModel;
 use liuguang\mvc\Templatel;
 
 /**
@@ -12,18 +13,48 @@ use liuguang\mvc\Templatel;
  *        
  */
 class Install extends BaseController {
+	/**
+	 * 显示安装界面
+	 *
+	 * @return void
+	 */
 	public function indexAction() {
-		$urlHandler=$this->getApp()->getUrlHandler();
-		//var_dump($urlHandler->getUrlData());exit();
+		$installModel = new InstallModel ( $this );
+		$errArr = array ();
+		if (! $installModel->statReady ()) {
+			$errArr [] = $installModel->getErrMsg ();
+		}
+		$this->showInstallForm ( $errArr );
+	}
+	/**
+	 * 处理提交的安装表单
+	 *
+	 * @return void
+	 */
+	public function doAction() {
+		$installModel = new InstallModel ( $this );
+		$errArr = array ();
+		if (! $installModel->statReady ()) {
+			$errArr [] = $installModel->getErrMsg ();
+			$this->showInstallForm ( $errArr );
+			return ;
+		}
+	}
+	/**
+	 * 显示安装界面
+	 *
+	 * @param array $errArr
+	 *        	错误消息提示
+	 * @return void
+	 */
+	private function showInstallForm(array $errArr = array()) {
+		$urlHandler = $this->getApp ()->getUrlHandler ();
+		// var_dump($urlHandler->getUrlData());exit();
+		$doInstallUrl = $urlHandler->createUrl ( 'web/Install', 'do', array () );
 		$title = 'V2EX › 安装';
 		$cssList = array (
 				'/public/css/main.css',
-				'/public/css/font-awesome.min.css',
-				/*'http://www.v2ex.com/static/css/style.css?v=2c35821f086f4210d98170308c7c5c6a', 
-				'http://www.v2ex.com/css/desktop.css?v=3.9.0',
-				'http://www.v2ex.com/static/css/highlight.css?v=4e42339469340aed94a0df881f682e48',
-				'http://www.v2ex.com/static/css/jquery.textcomplete.css?v=5a041d39010ded8724744170cea6ce8d',
-				'http://www.v2ex.com/static/js/select2/select2.css'*/
+				'/public/css/font-awesome.min.css' 
 		);
 		Templatel::setCompress ( true );
 		Templatel::tplStart ();

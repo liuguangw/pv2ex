@@ -5,7 +5,7 @@
 			<div style="padding-top: 6px;">
 				<table>
 					<tr>
-						<td><a href="/" name="top" title="way to explore" alt="logo">
+						<td><a href="/" title="way to explore">
 								<div class="top-logo"></div>
 						</a></td>
 						<td>
@@ -39,7 +39,7 @@
 					</div>
 					<div class="inner">
 						<div class="sep5"></div>
-						<div align="center">
+						<div class="center-text">
 							<a href="/signup" class="btn btn-super">现在注册</a>
 							<div class="sep5"></div>
 							<div class="sep10"></div>
@@ -54,44 +54,49 @@
 					<div class="header">
 						<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
 						安装&nbsp;
-						<li class="fa fa-server"></li>
+						<i class="fa fa-server"></i>
 					</div>
+					<!--{if empty($errArr)}-->
 					<div class="msg msg-common">填写下面的表单完成安装</div>
+					<!--{else}-->
+						<div class="msg msg-problem">请解决以下问题然后再提交：
+							<ul>
+							<!--{loop $errArr $errMsg}-->
+							<!--{eval echo '<li>',$errMsg,'</li>';}-->
+							<!--{/loop}-->
+							</ul>
+						</div>
+					<!--{/if}-->
 					<div class="cell">
-						<form method="post" action="/signin">
+						<form method="post" action="{$doInstallUrl}">
 							<table class="common-form">
 								<tr>
 									<td>管理员用户名</td>
 									<td><input type="text" class="sl" name="username" value=""
-										autofocus="autofocus" autocorrect="off" spellcheck="false"
-										autocapitalize="off" placeholder="管理员用户名" /></td>
+										autofocus="autofocus" spellcheck="false"
+										placeholder="管理员用户名" /></td>
 								</tr>
 								<tr>
 									<td>管理员昵称</td>
 									<td><input type="text" class="sl" name="nickname" value=""
-										autocorrect="off" spellcheck="false" autocapitalize="off"
-										placeholder="管理员昵称" /></td>
+										spellcheck="false" placeholder="管理员昵称" /></td>
 								</tr>
 								<tr>
 									<td>管理员密码</td>
 									<td><input type="password" class="sl" name="pass1"
-										value="" autocorrect="off" spellcheck="false"
-										autocapitalize="off" /></td>
+										value="" spellcheck="false"/></td>
 								</tr>
 								<tr>
 									<td>重复管理员密码</td>
 									<td><input type="password" class="sl" name="pass1"
-										value="" autocorrect="off" spellcheck="false"
-										autocapitalize="off" /></td>
+										value="" spellcheck="false"/></td>
 								</tr>
 								<tr>
 									<td></td>
-									<td><input type="hidden" value="83989" name="once" /><input
-										type="submit" class="btn btn-super" value="执行安装" /></td>
+									<td><input type="submit" class="btn btn-super"
+										value="执行安装" /></td>
 								</tr>
 							</table>
-
-							<input type="hidden" value="/" name="next" />
 
 						</form>
 					</div>
@@ -113,7 +118,7 @@
 				<div class="fr">
 					<a href="https://www.digitalocean.com/?refcode=1b51f1a7651d"
 						target="_blank"><img src="/public/img/do.png" width="64"
-						border="0" alt="DigitalOcean" /></a>
+						alt="DigitalOcean" /></a>
 				</div>
 				<strong><a href="/about" class="dark" target="_self">关于</a>
 					&nbsp; <span class="snow">·</span> &nbsp; <a href="/faq"

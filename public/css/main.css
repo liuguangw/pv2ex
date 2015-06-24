@@ -52,7 +52,7 @@ a:hover {
     width: 276px;
     height: 28px;
     background-size: 276px 28px;
-    background-image: url(/public/img/qbar_light-2x.png);
+    background-image: url(../img/qbar_light-2x.png);
     background-repeat: no-repeat;
     display: inline-block;
 }
@@ -111,7 +111,7 @@ a:hover {
 .top-logo{
 	width:94px;
 	height: 30px;
-	background-image: url(/public/img/logo-2x.png);
+	background-image: url(../img/logo-2x.png);
 	background-size: 94px 30px;
 	background-repeat: no-repeat;
 }
@@ -214,6 +214,10 @@ table.common-form tr>td:last-child{
 /*清理浮动*/
 .clear-b {
     clear: both;
+}
+/*居中对齐*/
+.center-text{
+	text-align: center;
 }
 /*区块*/
 .box {
