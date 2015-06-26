@@ -23,7 +23,7 @@ $config ['fslist'] = array (
 $config ['controllerNs'] = 'liuguang\\pv2ex\\controller';
 $config ['db_type'] = 'redis'; // or mysql
 $config ['db_id'] = 0;
-$config ['table_pre'] = 'pv2ex';
+$config ['table_pre'] = 'pv2ex_';
 // -----
 $config ['redis_host'] = '127.0.0.1';
 $config ['redis_port'] = 6379;

@@ -201,16 +201,20 @@ table.common-form tr>td:last-child{
     font-size: 13px;
     line-height: 120%;
     text-align: left;
-    border-left: 5px solid #c7e8ff;
     border-bottom: 1px solid #e2e2e2;
     color: #333;	
 }
 .msg-common{
+	border-left: 5px solid #c7e8ff;
     background-color: #f3faff;
 }
 .msg-problem {
+	border-left: 5px solid #fff000;
     background-color: #ffffc0;
 }
+.msg-problem>*:last-child {
+    margin-bottom: 0;
+} 
 /*清理浮动*/
 .clear-b {
     clear: both;
