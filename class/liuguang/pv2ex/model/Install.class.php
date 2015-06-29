@@ -101,32 +101,22 @@ class Install {
 		$redis->zAdd ( $tablePre . 'bkid:0:children', $bkid, $bkid );
 		// 设置节点信息
 		$redis->hMset ( $tablePre . 'bkid:' . $bkid . ':bkinfo', array (
+				'pid' => 0,
 				'bkid' => $bkid,
+				'is_bk' => 1,
+				'is_open' => 1,
+				'need_login' => 0,
 				'bkname' => '默认节点',
 				'bk_alt' => '本节点是安装时自动生成的节点',
-				'create_time' => time (),
-				'is_open' => 1,
-				'need_login' => 0 
+				'create_time' => time () 
 		) );
 		// 发表一篇默认帖子
-		$topicid = $redis->hIncrBy ( $tablePre . 'counter', 'topicid', 1 );
-		// id=>标题
-		$redis->hSet ( $tablePre . 'topic:titles', $topicid, '你好,世界' );
-		$postTime = time ();
-		$redis->hMset ( $tablePre . 'topicid:' . $topicid . ':topicinfo', array (
-				'topicid' => $topicid,
-				'author_uid' => 0,
-				'post_time' => $postTime,
-				'last_update' => 0,
-				'view_num' => 0,
-				'reply_num' => 0 
-		) );
-		// 将帖子加入节点
-		$redis->zAdd ( $tablePre . 'bkid:' . $bkid . ':posts', $postTime, $bkid );
+		$topicModel=new Topics($this->controller);
+		$topicModel->postTopic(0, $bkid, '你好世界', '你好，这是一个测试帖子');
 		// 网站配置信息
 		$redis->hMset ( $tablePre . 'site_conf', array (
 				'sitename' => '流光论坛',
-				'create_time' => $postTime,
+				'create_time' => time(),
 				'notice_on' => 1,
 				'notice_text' => '流光论坛安装成功',
 				'index_bkid' => $bkid,

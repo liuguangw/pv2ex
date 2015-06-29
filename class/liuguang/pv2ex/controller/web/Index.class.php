@@ -7,7 +7,6 @@ class Index extends BaseController{
 	public function indexAction() {
 		$this->forceInstall();
 		$title = 'V2EX › 测试页面';
-		Templatel::setCompress (true);
 		Templatel::tplStart ();
 		include Templatel::view ( '/test.html' );
 		Templatel::tplEnd ();
