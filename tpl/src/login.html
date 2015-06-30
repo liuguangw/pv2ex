@@ -1,0 +1,90 @@
+<!--{include /inc/header.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signin" class="top">登录</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+		<!--{include /widget/login.html}-->
+		</div>
+		<div id="Main">
+			<div class="sep20"></div>
+			<div class="box">
+				
+			<div class="header">
+					<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+					登录&nbsp;
+					<i class="fa fa-lock"></i>
+			</div>
+			<!--{if !empty($signMsg)}-->
+			<div class="msg msg-common">{$signMsg}</div>
+			<!--{elseif !empty($signErrArr)}-->
+			<div class="msg msg-problem">请解决以下问题然后再提交：
+				<ul>
+				<!--{loop $signErrArr $errMsg}-->
+				<!--{eval echo '<li>',$errMsg,'</li>';}-->
+				<!--{/loop}-->
+				</ul>
+			</div>
+			<!--{/if}-->
+			<div class="cell">
+				<form method="post" action="{$doLoginUrl}">
+					<table class="common-form">
+						<tr>
+							<td>用户名</td>
+							<td><input type="text" class="sl" name="username" value=""
+								autofocus="autofocus" spellcheck="false"
+								placeholder="用户名或电子邮箱地址" /></td>
+						</tr>
+						<tr>
+							<td>密码</td>
+							<td><input type="password" class="sl" name="pass"
+								value="" spellcheck="false"/></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" class="btn btn-super"
+								value="登录" /></td>
+						</tr>
+						<tr>
+			                <td></td>
+			                <td><a href="{$resetPassUrl}">我忘记密码了</a></td>
+			            </tr>
+					</table>
+				</form>
+			</div>
+
+			</div><!-- /end box -->
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<!--{include /inc/footer.html}-->

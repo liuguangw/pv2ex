@@ -2,17 +2,17 @@
 
 namespace liuguang\pv2ex\model;
 
-use liuguang\pv2ex\model\BaseController;
-
 class User {
 	private $conn;
 	private $redis;
 	private $dbType;
 	private $errMsg;
 	private $tablePre;
+	private $userImg;
 	public function __construct(BaseController $controller) {
 		$this->dbType = $controller->getDbType ();
 		$this->tablePre = $controller->getTablePre ();
+		$this->userImg=$controller->getAppConfig()->get('app_pub_context').'/img/user_default.png';
 		if ($this->dbType == BaseController::DB_MYSQL) {
 			$this->conn = $controller->getConn ();
 		} elseif ($this->dbType == BaseController::DB_REDIS) {
@@ -240,9 +240,9 @@ class User {
 		local uid=redis.call(\'hincrby\',\''.$this->tablePre.'counter\',\'uid\',1)
 		redis.call(\'hset\',\''.$this->tablePre.'username_uids\',ARGV[1],uid)
 		redis.call(\'hset\',\''.$this->tablePre.'email_uids\',ARGV[4],uid)
-		redis.call(\'hmset\',\''.$this->tablePre.'uid:\'..uid..\':userinfo\',\'uid\',uid,\'username\',ARGV[1],\'nickname\',ARGV[2],\'pass\',ARGV[3],\'email\',ARGV[4],\'regtime\',ARGV[5],\'usersign\',\'\',\'lastlogin\',0)
+		redis.call(\'hmset\',\''.$this->tablePre.'uid:\'..uid..\':userinfo\',\'uid\',uid,\'username\',ARGV[1],\'nickname\',ARGV[2],\'pass\',ARGV[3],\'email\',ARGV[4],\'regtime\',ARGV[5],\'usersign\',\'\',\'user_img\',ARGV[6],\'lastlogin\',0)
 		return uid';
-		return $this->redis->eval($lua,array($username,$nickname,$this->encodePass($username, $pass),$email,time()));
+		return $this->redis->eval($lua,array($username,$nickname,$this->encodePass($username, $pass),$email,time(),$this->userImg));
 	}
 	/**
 	 * 添加超级管理员权限

@@ -1,0 +1,109 @@
+<!--{include /inc/header.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signin" class="top">登录</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+		<!--{include /widget/login.html}-->
+		</div>
+		<div id="Main">
+			<div class="sep20"></div>
+			<div class="box">
+				
+			<div class="header">
+					<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+					注册
+			</div>
+			<!--{if !empty($signMsg)}-->
+			<div class="msg msg-common">{$signMsg}</div>
+			<!--{elseif !empty($signErrArr)}-->
+			<div class="msg msg-problem">请解决以下问题然后再提交：
+				<ul>
+				<!--{loop $signErrArr $errMsg}-->
+				<!--{eval echo '<li>',$errMsg,'</li>';}-->
+				<!--{/loop}-->
+				</ul>
+			</div>
+			<!--{/if}-->
+			<div class="cell">
+				<form method="post" action="{$doRegUrl}">
+					<table class="common-form">
+						<tr>
+							<td>用户名</td>
+							<td>
+								<input type="text" class="sl" name="username" value=""
+								autofocus="autofocus" spellcheck="false"/>
+								<div class="sep5"></div>
+								<span class="fade">请使用半角的 a-z 或数字 0-9</span>
+							</td>
+						</tr>
+						<tr>
+							<td>密码</td>
+							<td><input type="password" class="sl" name="pass1"
+								value="" spellcheck="false"/></td>
+						</tr>
+						<tr>
+							<td>重复密码</td>
+							<td><input type="password" class="sl" name="pass2"
+								value="" spellcheck="false"/></td>
+						</tr>
+						<tr>
+							<td>电子邮件</td>
+							<td>
+								<input type="email" class="sl" name="email" value="" spellcheck="false"/>
+								<div class="sep5"></div>
+								<span class="fade">请使用真实电子邮箱注册，我们不会将你的邮箱地址分享给任何人</span>
+							</td>
+						</tr>
+						<tr>
+							<td>你是机器人么？</td>
+							<td>
+								<img src="http://www.v2ex.com/_captcha?once=36961" alt="验证码"/>
+								<div class="sep10"></div>
+								<input type="text" class="sl" name="rcode" value="" spellcheck="false" placeholder="请输入上图中的验证码"/>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" class="btn btn-super"
+								value="注册" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+
+			</div><!-- /end box -->
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<!--{include /inc/footer.html}-->

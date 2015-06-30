@@ -7,7 +7,20 @@
 					target="_blank"><img src="/public/img/powered.png" width="64"
 					alt="conoha" /></a>
 			</div>
-			<strong><a href="/about" class="dark" target="_self">关于</a>
+			<strong>
+			<!--{eval $appInit=$this->isAppInit();}-->
+			<!--{if $appInit}-->
+			<!--{eval $urlM=new \liuguang\pv2ex\model\SiteUrl($this);$urlArr=$urlM->getSiteLinks();$i=0;}-->
+				<!--{loop $urlArr $urlNode}-->
+				<!--{eval if($i==0)
+					$i++;
+				else
+					echo ' &nbsp; <span class="snow">·</span> &nbsp; ';
+				}-->
+				<a href="{$urlNode['url']}" class="dark" target="_self">{$urlNode['name']}</a>
+				<!--{/loop}-->
+			<!--{else}-->
+			<a href="/about" class="dark" target="_self">关于</a>
 				&nbsp; <span class="snow">·</span> &nbsp; <a href="/faq"
 				class="dark" target="_self">FAQ</a> &nbsp; <span class="snow">·</span>
 				&nbsp; <a href="/p/7v9TEc53" class="dark" target="_self">API</a>
@@ -21,7 +34,9 @@
 				href="http://livid.v2ex.com/" class="dark" target="_blank">博客</a>
 				&nbsp; <span class="snow">·</span> &nbsp; <a href="/start"
 				class="dark" target="_blank">上网首页</a> &nbsp; <span class="snow">·</span>
-				&nbsp; 1174 人在线</strong> &nbsp; <span class="fade">最高记录 1307</span>
+				&nbsp; 1174 人在线
+			<!--{/if}-->
+			</strong> &nbsp; <span class="fade">最高记录 1307</span>
 			<div class="sep20"></div>
 			创意工作者们的社区
 			<div class="sep5"></div>

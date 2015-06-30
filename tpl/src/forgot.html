@@ -1,0 +1,88 @@
+<!--{include /inc/header.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signin" class="top">登录</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+		<!--{include /widget/login.html}-->
+		</div>
+		<div id="Main">
+			<div class="sep20"></div>
+			<div class="box">
+				
+			<div class="header">
+					<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+					通过电子邮件重设密码
+			</div>
+			<!--{if !empty($formMsg)}-->
+			<div class="msg msg-common">{$formMsg}</div>
+			<!--{elseif !empty($formErrArr)}-->
+			<div class="msg msg-problem">请解决以下问题然后再提交：
+				<ul>
+				<!--{loop $formErrArr $errMsg}-->
+				<!--{eval echo '<li>',$errMsg,'</li>';}-->
+				<!--{/loop}-->
+				</ul>
+			</div>
+			<!--{/if}-->
+			<div class="cell">
+				<form method="post" action="{$doResetUrl}">
+					<table class="common-form">
+						<tr>
+							<td>用户名</td>
+							<td><input type="text" class="sl" name="username" value=""
+								autofocus="autofocus" spellcheck="false"/></td>
+						</tr>
+						<tr>
+							<td>注册邮箱</td>
+							<td><input type="email" class="sl" name="pass"
+								value="" spellcheck="false"/></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" class="btn btn-super"
+								value="继续" /></td>
+						</tr>
+						<tr>
+			                <td></td>
+			                <td><span class="gray">24 小时内，至多可以重新设置密码 2 次。</span></td>
+			            </tr>
+					</table>
+				</form>
+			</div>
+
+			</div><!-- /end box -->
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<!--{include /inc/footer.html}-->

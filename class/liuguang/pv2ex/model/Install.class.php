@@ -2,7 +2,6 @@
 
 namespace liuguang\pv2ex\model;
 
-use liuguang\pv2ex\model\BaseController;
 
 class Install {
 	private $controller;
@@ -93,23 +92,14 @@ class Install {
 				'uid' => 0,
 				'topicid' => 0,
 				'replyid' => 0,
-				'bkid' => 0 
+				'bkid' => 0 ,
+				'linkid'=>0
 		) );
 		// 创建默认节点
-		$bkid = $redis->hIncrBy ( $tablePre . 'counter', 'bkid', 1 );
-		// 设置上级,节点的排序默认按id
-		$redis->zAdd ( $tablePre . 'bkid:0:children', $bkid, $bkid );
-		// 设置节点信息
-		$redis->hMset ( $tablePre . 'bkid:' . $bkid . ':bkinfo', array (
-				'pid' => 0,
-				'bkid' => $bkid,
-				'is_bk' => 1,
-				'is_open' => 1,
-				'need_login' => 0,
-				'bkname' => '默认节点',
-				'bk_alt' => '本节点是安装时自动生成的节点',
-				'create_time' => time () 
-		) );
+		$bkM=new BkModel($this->controller);
+		$bkid=$bkM->createBk(0, '默认节点');
+		//将默认节点加入首页导航
+		$bkM->addBk2Index($bkid);
 		// 发表一篇默认帖子
 		$topicModel=new Topics($this->controller);
 		$topicModel->postTopic(0, $bkid, '你好世界', '你好，这是一个测试帖子');
@@ -119,8 +109,23 @@ class Install {
 				'create_time' => time(),
 				'notice_on' => 1,
 				'notice_text' => '流光论坛安装成功',
-				'index_bkid' => $bkid,
 				'open_compress' => 1 
 		) );
+		//添加链接
+		$linksArr=array(
+				array('name'=>'关于','url'=>'/about'),
+				array('name'=>'FAQ','url'=>'/faq'),
+				array('name'=>'API','url'=>'/api'),
+				array('name'=>'我们的愿景','url'=>'/mission'),
+				array('name'=>'IP查询','url'=>'/ip'),
+				array('name'=>'工作空间','url'=>'/workspace'),
+				array('name'=>'广告投放','url'=>'/advertise'),
+				array('name'=>'博客','url'=>'/blog'),
+				array('name'=>'上网首页','url'=>'/start')
+		);
+		$urlM=new SiteUrl($this->controller);
+		foreach ($linksArr as $linkNode){
+			$urlM->addUrl($linkNode['name'], $linkNode['url']);
+		}
 	}
 }

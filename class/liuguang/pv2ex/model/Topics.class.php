@@ -2,8 +2,6 @@
 
 namespace liuguang\pv2ex\model;
 
-use liuguang\pv2ex\model\BaseController;
-
 /**
  *
  * 论坛帖子的接口
@@ -77,21 +75,31 @@ class Topics {
 			}
 			$so->close ();
 			$words = array_unique ( $words );
-			foreach ( $words as $strTmp ) {
-				// 建立关键字索引
-				$redis->zAdd ( $tablePre . 'keywords:' . $strTmp . ':topiclist', $topicid, $topicid );
-			}
+			//批量添加关键字索引脚本
+			$lua='local arrLength=#(ARGV)
+			local topicid=ARGV[arrLength]
+			local tablePre=ARGV[arrLength-1]
+			for i=1, (arrLength-2) do      
+			    redis.call(\'zadd\',tablePre..\'keywords:\'..ARGV[i]..\':topiclist\',topicid,topicid)
+			end';
+			$words[]=$tablePre;
+			$words[]=$topicid;
+			$redis->eval($lua,$words);
 		}
 		// 向全局最新帖子列表中加入此帖子id
 		$redis->lPush ( $tablePre . 'new_posts', $topicid );
 		// 向所在板块最新帖子列表中加入此帖子id
 		$redis->lPush ( $tablePre . 'bkid:' . $bkid . ':new_posts', $topicid );
+		//向所在板块的父节点插入帖子记录
+		$pid=$redis->hGet($tablePre.'bkid:'.$bkid.':bkinfo','pid');
+		$redis->lPush ( $tablePre . 'bkid:' . $pid . ':child_posts', $topicid );
 		// 将帖子加入所在板块的帖子有序集合中,按时间排序
 		$postTime = time ();
 		$redis->zAdd ( $tablePre . 'bkid:' . $bkid . ':posts', $postTime, $topicid );
 		// 存放帖子信息
 		$topicInfo = array (
 				'topicid' => $topicid,
+				'bkid'=>$bkid,
 				'uid' => $uid,
 				'title' => $title,
 				'content' => $content,

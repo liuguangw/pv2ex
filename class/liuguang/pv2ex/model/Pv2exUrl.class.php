@@ -65,7 +65,29 @@ class Pv2exUrl implements UrlHandler {
 			) )) {
 				$urlData->set ( $this->cKey, 'web/Install' );
 				$urlData->set ( $this->aKey, 'do' );
-			} else {
+			}
+			elseif (in_array ( $url, array (
+					'/signin',
+					'/signin/'
+			) )) {
+				$urlData->set ( $this->cKey, 'web/SignIn' );
+				$urlData->set ( $this->aKey, 'index' );
+			}
+			elseif (in_array ( $url, array (
+					'/signup',
+					'/signup/'
+			) )) {
+				$urlData->set ( $this->cKey, 'web/SignUp' );
+				$urlData->set ( $this->aKey, 'index' );
+			}
+			elseif (in_array ( $url, array (
+					'/forgot',
+					'/forgot/'
+			) )) {
+				$urlData->set ( $this->cKey, 'web/Forgot' );
+				$urlData->set ( $this->aKey, 'index' );
+			}
+			 else {
 				$urlData->set ( $this->cKey, $this->err404C );
 				$urlData->set ( $this->aKey, $this->defaultA );
 			}
@@ -94,6 +116,19 @@ class Pv2exUrl implements UrlHandler {
 		$url_head = $this->appContext . '/';
 		if ($cname == 'web/Install') {
 			$url = $url_head . 'install';
+			if ($aname != 'index')
+				$url .= ('/' . $aname);
+		}elseif ($cname == 'web/SignIn') {
+			$url = $url_head . 'sigin';
+			if ($aname != 'index')
+				$url .= ('/' . $aname);
+		}elseif ($cname == 'web/SignUp') {
+			$url = $url_head . 'signup';
+			if ($aname != 'index')
+				$url .= ('/' . $aname);
+		}
+		elseif ($cname == 'web/Forgot') {
+			$url = $url_head . 'forgot';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
 		}
