@@ -16,6 +16,8 @@ class SignUp extends BaseController {
 		$this->forceInstall ();
 		$urlHandler = $this->getApp ()->getUrlHandler ();
 		$doRegUrl = $urlHandler->createUrl ( 'web/SignUp', 'do', array () );
+		$captchaUrl=$urlHandler->createUrl('web/Captcha', 'index', array());
+		$captchaUrlT=$urlHandler->createUrl('web/Captcha', '--rand--',array(),false);
 		$title = 'V2EX › 注册';
 		Templatel::tplStart ();
 		include Templatel::view ( '/reg.html' );

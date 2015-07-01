@@ -83,7 +83,7 @@
 						<tr>
 							<td>你是机器人么？</td>
 							<td>
-								<img src="http://www.v2ex.com/_captcha?once=36961" alt="验证码"/>
+								<img class="captcha" src="{$captchaUrl}" alt="验证码"/ onclick="reloadCaptch(this);">
 								<div class="sep10"></div>
 								<input type="text" class="sl" name="rcode" value="" spellcheck="false" placeholder="请输入上图中的验证码"/>
 							</td>
@@ -106,4 +106,10 @@
 	<div class="sep20"></div>
 </div>
 <!--{include /inc/bottom.html}-->
+<script type="text/javascript">
+function reloadCaptch(captchaElement){
+	var imgUrl="{$captchaUrlT}".replace("--rand--",Math.random());
+	captchaElement.src=imgUrl;
+}
+</script>
 <!--{include /inc/footer.html}-->

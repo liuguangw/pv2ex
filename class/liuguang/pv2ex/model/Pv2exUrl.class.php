@@ -45,7 +45,7 @@ class Pv2exUrl implements UrlHandler {
 			$urlData->set ( $this->aKey, $this->defaultA );
 		} else {
 			// 判断url格式是否正确
-			if (! preg_match ( '/^(\\/[a-zA-z0-9_\\-]{1,13}){1,6}\\/?$/', $url )) {
+			if (! preg_match ( '/^(\\/[^\\/]{1,32}){1,6}\\/?$/', $url )) {
 				$urlData->set ( $this->cKey, $this->err404C );
 				$urlData->set ( $this->aKey, $this->defaultA );
 				return $urlData;
@@ -85,6 +85,10 @@ class Pv2exUrl implements UrlHandler {
 					'/forgot/'
 			) )) {
 				$urlData->set ( $this->cKey, 'web/Forgot' );
+				$urlData->set ( $this->aKey, 'index' );
+			}
+			elseif (preg_match('/^\\/captcha(\\/([^\\/]+\\/?)?)?$/', $url)) {
+				$urlData->set ( $this->cKey, 'web/Captcha' );
 				$urlData->set ( $this->aKey, 'index' );
 			}
 			 else {
@@ -129,6 +133,11 @@ class Pv2exUrl implements UrlHandler {
 		}
 		elseif ($cname == 'web/Forgot') {
 			$url = $url_head . 'forgot';
+			if ($aname != 'index')
+				$url .= ('/' . $aname);
+		}
+		elseif ($cname == 'web/Captcha') {
+			$url = $url_head . 'captcha';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
 		}

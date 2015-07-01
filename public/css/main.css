@@ -26,6 +26,9 @@ ol {
     margin: 1em 0px 0em 2em;
     padding: 0px;
 }
+img{
+	border: 0;
+}
 /*链接样式*/
 a:link, a:visited, a:active {
     color: #778087;
@@ -415,7 +418,7 @@ img.avatar {
 	vertical-align: middle;
 }
 .cell.item table td:last-child{
-	width: 10px;
+	width: 70px;
     vertical-align: middle;
     text-align: right;
 }
@@ -425,4 +428,8 @@ img.avatar {
     line-height: 130%;
     text-shadow: 0px 1px 0px #fff;
     word-wrap: break-word;
+}
+/*验证码图片*/
+img.captcha{
+	cursor: pointer;
 }
