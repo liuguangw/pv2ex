@@ -32,7 +32,8 @@ class USession {
 			$this->redis = $controller->getRedis ();
 		}
 		$this->cookieName = 'osid';
-		$this->cookieLife = 30 * 24 * 3600;
+		// 默认20分钟有效期
+		$this->cookieLife = 20 * 60;
 		$this->isDestroy = false;
 		if (empty ( $_COOKIE [$this->cookieName] )) {
 			$this->initNewSession ();
@@ -156,6 +157,15 @@ class USession {
 		return $this->sessionData;
 	}
 	/**
+	 * 修改cookies的有效期
+	 */
+	public function updateLifetime($cookieLife) {
+		$this->cookieLife = $cookieLife;
+		if (! $this->isNew) {
+			setcookie ( $this->cookieName, $this->sid, time () + $this->cookieLife );
+		}
+	}
+	/**
 	 * 销毁sid会话在数据库内的记录
 	 *
 	 * @param string $sid
@@ -220,13 +230,13 @@ class USession {
 			$this->updateSessionR ( $sid );
 	}
 	/**
-	 * 
+	 *
 	 * @todo
+	 *
 	 */
-	private function updateSessionM($sid){
-		
+	private function updateSessionM($sid) {
 	}
-	private function updateSessionR($sid){
+	private function updateSessionR($sid) {
 		$redis = $this->redis;
 		$key = $this->getSessionRkey ( $sid );
 		$redis->hMset ( $key, $this->sessionData->toArray () );

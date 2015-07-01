@@ -56,10 +56,16 @@
 						<tr>
 							<td>用户名</td>
 							<td>
-								<input type="text" class="sl" name="username" value=""
+								<input type="text" class="sl" name="username" value="{$username}"
 								autofocus="autofocus" spellcheck="false"/>
 								<div class="sep5"></div>
-								<span class="fade">请使用半角的 a-z 或数字 0-9</span>
+								<span class="fade">请使用半角的 a-z、-、_ 或数字 0-9</span>
+							</td>
+						</tr>
+						<tr>
+							<td>昵称</td>
+							<td>
+								<input type="text" class="sl" name="nickname" value="{$nickname}" spellcheck="false"/>
 							</td>
 						</tr>
 						<tr>
@@ -75,7 +81,7 @@
 						<tr>
 							<td>电子邮件</td>
 							<td>
-								<input type="email" class="sl" name="email" value="" spellcheck="false"/>
+								<input type="email" class="sl" name="email" value="{$email}" spellcheck="false"/>
 								<div class="sep5"></div>
 								<span class="fade">请使用真实电子邮箱注册，我们不会将你的邮箱地址分享给任何人</span>
 							</td>
@@ -83,7 +89,7 @@
 						<tr>
 							<td>你是机器人么？</td>
 							<td>
-								<img class="captcha" src="{$captchaUrl}" alt="验证码"/ onclick="reloadCaptch(this);">
+								<img class="captcha" src="{$captchaUrl}" alt="验证码" onclick="reloadCaptch(this);">
 								<div class="sep10"></div>
 								<input type="text" class="sl" name="rcode" value="" spellcheck="false" placeholder="请输入上图中的验证码"/>
 							</td>

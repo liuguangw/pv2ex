@@ -53,9 +53,7 @@ class Pv2exUrl implements UrlHandler {
 			// 安装界面和处理安装的url
 			if (in_array ( $url, array (
 					'/install',
-					'/install/',
-					'/install/index',
-					'/install/index/' 
+					'/install/' 
 			) )) {
 				$urlData->set ( $this->cKey, 'web/Install' );
 				$urlData->set ( $this->aKey, 'index' );
@@ -74,11 +72,25 @@ class Pv2exUrl implements UrlHandler {
 				$urlData->set ( $this->aKey, 'index' );
 			}
 			elseif (in_array ( $url, array (
+					'/signin/do',
+					'/signin/do/'
+			) )) {
+				$urlData->set ( $this->cKey, 'web/SignIn' );
+				$urlData->set ( $this->aKey, 'do' );
+			}
+			elseif (in_array ( $url, array (
 					'/signup',
 					'/signup/'
 			) )) {
 				$urlData->set ( $this->cKey, 'web/SignUp' );
 				$urlData->set ( $this->aKey, 'index' );
+			}
+			elseif (in_array ( $url, array (
+					'/signup/do',
+					'/signup/do/'
+			) )) {
+				$urlData->set ( $this->cKey, 'web/SignUp' );
+				$urlData->set ( $this->aKey, 'do' );
 			}
 			elseif (in_array ( $url, array (
 					'/forgot',

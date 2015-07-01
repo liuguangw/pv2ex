@@ -102,7 +102,6 @@ class Install extends BaseController {
 	 */
 	private function showInstallForm($installStep, array $errArr = array()) {
 		$urlHandler = $this->getApp ()->getUrlHandler ();
-		// var_dump($urlHandler->getUrlData());exit();
 		$doInstallUrl = $urlHandler->createUrl ( 'web/Install', 'do', array () );
 		$title = 'V2EX › 安装';
 		Templatel::tplStart ();

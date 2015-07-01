@@ -17,6 +17,8 @@ class SignIn extends BaseController {
 		$urlHandler = $this->getApp ()->getUrlHandler ();
 		$doLoginUrl = $urlHandler->createUrl ( 'web/SignIn', 'do', array () );
 		$resetPassUrl = $urlHandler->createUrl ( 'web/Forgot', 'index', array () );
+		$captchaUrl=$urlHandler->createUrl('web/Captcha', 'index', array());
+		$captchaUrlT=$urlHandler->createUrl('web/Captcha', '--rand--',array(),false);
 		$title = 'V2EX › 登录';
 		Templatel::tplStart ();
 		include Templatel::view ( '/login.html' );
