@@ -1,0 +1,55 @@
+<!--{include /inc/header.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signin" class="top">登录</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+		<!--{include /widget/login.html}-->
+		</div>
+		<div id="Main">
+			<div class="sep20"></div>
+			<div class="box">
+				
+			<div class="header">
+					<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+					注册
+			</div>
+			<div class="cell">
+				<p>恭喜你! 注册账号成功,你的ID是{$uid},<a href="{$loginUrl}">点击这里</a>登录</p>
+			</div>
+
+			</div><!-- /end box -->
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<!--{include /inc/footer.html}-->

@@ -56,7 +56,7 @@
 					<table class="common-form">
 						<tr>
 							<td>用户名</td>
-							<td><input type="text" class="sl" name="username" value=""
+							<td><input type="text" class="sl" name="username" value="{$username}"
 								autofocus="autofocus" spellcheck="false"
 								placeholder="用户名或电子邮箱地址" /></td>
 						</tr>
@@ -83,6 +83,9 @@
 			                <td><a href="{$resetPassUrl}">我忘记密码了</a></td>
 			            </tr>
 					</table>
+					<!--{if !empty($url)}-->
+					<input type="hidden" value="{$url}" name="url"/>
+					<!--{/if}-->
 				</form>
 			</div>
 

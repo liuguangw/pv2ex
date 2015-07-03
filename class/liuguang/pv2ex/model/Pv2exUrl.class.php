@@ -135,7 +135,7 @@ class Pv2exUrl implements UrlHandler {
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
 		}elseif ($cname == 'web/SignIn') {
-			$url = $url_head . 'sigin';
+			$url = $url_head . 'signin';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
 		}elseif ($cname == 'web/SignUp') {

@@ -12,7 +12,7 @@ class User {
 	public function __construct(BaseController $controller) {
 		$this->dbType = $controller->getDbType ();
 		$this->tablePre = $controller->getTablePre ();
-		$this->userImg=$controller->getAppConfig()->get('app_pub_context').'/img/user_default.png';
+		$this->userImg = $controller->getAppConfig ()->get ( 'app_pub_context' ) . '/img/user_default.png';
 		if ($this->dbType == BaseController::DB_MYSQL) {
 			$this->conn = $controller->getConn ();
 		} elseif ($this->dbType == BaseController::DB_REDIS) {
@@ -200,7 +200,7 @@ class User {
 			return - 1;
 		}
 		if ($this->dbType == BaseController::DB_MYSQL)
-			return $this->addAccountM($username,$nickname,$pass,$email);
+			return $this->addAccountM ( $username, $nickname, $pass, $email );
 		elseif ($this->dbType == BaseController::DB_REDIS)
 			return $this->addAccountR ( $username, $nickname, $pass, $email );
 	}
@@ -227,40 +227,50 @@ class User {
 	 * @return int 返回用户id,失败则返回-1
 	 */
 	private function addAccountR($username, $nickname, $pass, $email) {
-		$lua='-- 检测用户名是否被使用
-		local checkExists=redis.call(\'hexists\',\''.$this->tablePre.'username_uids\',ARGV[1])
+		$lua = '-- 检测用户名是否被使用
+		local checkExists=redis.call(\'hexists\',\'' . $this->tablePre . 'username_uids\',ARGV[1])
 		if checkExists~=0 then
 			return -1
 		end
 		-- 检测email是否被使用
-		checkExists=redis.call(\'hexists\',\''.$this->tablePre.'email_uids\',ARGV[4])
+		checkExists=redis.call(\'hexists\',\'' . $this->tablePre . 'email_uids\',ARGV[4])
 		if checkExists~=0 then
 			return -1
 		end
-		local uid=redis.call(\'hincrby\',\''.$this->tablePre.'counter\',\'uid\',1)
-		redis.call(\'hset\',\''.$this->tablePre.'username_uids\',ARGV[1],uid)
-		redis.call(\'hset\',\''.$this->tablePre.'email_uids\',ARGV[4],uid)
-		redis.call(\'hmset\',\''.$this->tablePre.'uid:\'..uid..\':userinfo\',\'uid\',uid,\'username\',ARGV[1],\'nickname\',ARGV[2],\'pass\',ARGV[3],\'email\',ARGV[4],\'regtime\',ARGV[5],\'usersign\',\'\',\'user_img\',ARGV[6],\'lastlogin\',0)
+		local uid=redis.call(\'hincrby\',\'' . $this->tablePre . 'counter\',\'uid\',1)
+		redis.call(\'hset\',\'' . $this->tablePre . 'username_uids\',ARGV[1],uid)
+		redis.call(\'hset\',\'' . $this->tablePre . 'email_uids\',ARGV[4],uid)
+		redis.call(\'hmset\',\'' . $this->tablePre . 'uid:\'..uid..\':userinfo\',\'uid\',uid,\'username\',ARGV[1],\'nickname\',ARGV[2],\'pass\',ARGV[3],\'email\',ARGV[4],\'regtime\',ARGV[5],\'usersign\',\'\',\'user_img\',ARGV[6],\'lastlogin\',0)
 		return uid';
-		return $this->redis->eval($lua,array($username,$nickname,$this->encodePass($username, $pass),$email,time(),$this->userImg));
+		return $this->redis->eval ( $lua, array (
+				$username,
+				$nickname,
+				$this->encodePass ( $username, $pass ),
+				$email,
+				time (),
+				$this->userImg 
+		) );
 	}
 	/**
 	 * 添加超级管理员权限
-	 * 
-	 * @param int $uid 用户id
+	 *
+	 * @param int $uid
+	 *        	用户id
 	 * @return void
 	 */
-	public function addSuperAdmin($uid){
+	public function addSuperAdmin($uid) {
 		if ($this->dbType == BaseController::DB_MYSQL)
-			$this->addSuperAdminM($uid);
+			$this->addSuperAdminM ( $uid );
 		elseif ($this->dbType == BaseController::DB_REDIS)
-			$this->addSuperAdminR($uid);
+			$this->addSuperAdminR ( $uid );
 	}
 	/**
 	 * 添加超级管理员权限
-	 * 
+	 *
 	 * @todo
-	 * @param int $uid 用户id
+	 *
+	 * @param int $uid
+	 *        	用户id
 	 * @return void
 	 */
 	private function addSuperAdminM($uid) {
@@ -268,43 +278,85 @@ class User {
 	/**
 	 * 添加超级管理员权限
 	 *
-	 * @param int $uid 用户id
+	 * @param int $uid
+	 *        	用户id
 	 * @return void
 	 */
 	private function addSuperAdminR($uid) {
-		$tablePre=$this->tablePre;
-		$this->redis->zAdd($tablePre.'superadmins',time(),$uid);
+		$tablePre = $this->tablePre;
+		$this->redis->zAdd ( $tablePre . 'superadmins', time (), $uid );
 	}
 	/**
 	 * 检测一个用户是否为网站管理员
-	 * 
-	 * @param int $uid 用户id
+	 *
+	 * @param int $uid
+	 *        	用户id
 	 * @return boolean
 	 */
 	public function isSuperAdmin($uid) {
 		if ($this->dbType == BaseController::DB_MYSQL)
-			return $this->isSuperAdminM($uid);
+			return $this->isSuperAdminM ( $uid );
 		elseif ($this->dbType == BaseController::DB_REDIS)
-			return $this->isSuperAdminR($uid);
+			return $this->isSuperAdminR ( $uid );
 	}
 	/**
 	 * 检测一个用户是否为网站管理员
-	 * 
+	 *
 	 * @todo
-	 * @param int $uid 用户id
+	 *
+	 * @param int $uid
+	 *        	用户id
 	 * @return boolean
 	 */
 	private function isSuperAdminM($uid) {
 	}
-
+	
 	/**
 	 * 检测一个用户是否为网站管理员
 	 *
-	 * @param int $uid 用户id
+	 * @param int $uid
+	 *        	用户id
 	 * @return boolean
 	 */
 	private function isSuperAdminR($uid) {
+		$tablePre = $this->tablePre;
+		return ($this->redis->zScore ( $tablePre . 'superadmins', $uid ) !== false);
+	}
+	/**
+	 * 验证用户名密码
+	 *
+	 * @param string $username        	
+	 * @param string $pass        	
+	 * @return int 失败时返回-1,正确时返回用户id
+	 */
+	public function authPass($username, $pass) {
+		$encodedPass = $this->encodePass ( $username, $pass );
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return $this->authPassM ( $username, $encodedPass );
+		elseif ($this->dbType == BaseController::DB_REDIS)
+			return $this->authPassR ( $username, $encodedPass );
+	}
+	/**
+	 *
+	 * @todo
+	 *
+	 */
+	private function authPassM($username, $pass) {
+	}
+	private function authPassR($username, $pass) {
+		$redis=$this->redis;
 		$tablePre=$this->tablePre;
-		return ($this->redis->zScore($tablePre.'superadmins',$uid)!==false);
+		$lua='-- 获取用户id
+		local uid=redis.call(\'hget\',ARGV[1]..\'username_uids\',ARGV[2])
+		if uid == false then
+			return -1
+		end
+		local pass=redis.call(\'hget\',ARGV[1]..\'uid:\'..uid..\':userinfo\',\'pass\')
+		if pass == ARGV[3] then
+			return uid
+		else
+			return -1
+		end';
+		return $redis->eval($lua,array($tablePre,$username,$pass));
 	}
 }

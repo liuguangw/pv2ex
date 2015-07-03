@@ -82,9 +82,9 @@ class SignUp extends BaseController {
 		if ($uid == - 1) {
 			$errArr [] = '注册账号失败,请稍后再试';
 			$this->showRegForm ( '', $errArr );
-		} else
-			//注册成功
-			var_dump ( $uid );
+		} else{
+			$this->showRegOk($uid);
+		}
 	}
 	/**
 	 * 显示注册页面
@@ -107,6 +107,19 @@ class SignUp extends BaseController {
 		$email = $postData->get ( 'email', '' );
 		Templatel::tplStart ();
 		include Templatel::view ( '/reg.html' );
+		Templatel::tplEnd ();
+	}
+	/**
+	 * 注册成功提示
+	 * 
+	 * @param int $uid
+	 */
+	private function showRegOk($uid){
+		$urlHandler = $this->getApp ()->getUrlHandler ();
+		$loginUrl = $urlHandler->createUrl ( 'web/SignIn', 'index', array () );
+		$title = 'V2EX › 注册';
+		Templatel::tplStart ();
+		include Templatel::view ( '/regok.html' );
 		Templatel::tplEnd ();
 	}
 }

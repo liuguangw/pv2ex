@@ -163,7 +163,27 @@ class USession {
 		$this->cookieLife = $cookieLife;
 		if (! $this->isNew) {
 			setcookie ( $this->cookieName, $this->sid, time () + $this->cookieLife );
+			if ($this->dbType == BaseController::DB_MYSQL)
+				$this->updateLifetimeM ( $this->sid, $cookieLife );
+			elseif ($this->dbType == BaseController::DB_REDIS)
+				$this->updateLifetimeR ( $this->sid, $cookieLife );
 		}
+	}
+	/**
+	 * 
+	 *  @todo
+	 */
+	private function updateLifetimeM($sid,$cookieLife){
+		
+	}
+	/**
+	 * 
+	 *  @todo
+	 */
+	private function updateLifetimeR($sid,$cookieLife){
+		$redis=$this->redis;
+		$skey=$this->getSessionRkey($sid);
+		$redis->expire($skey,$cookieLife);
 	}
 	/**
 	 * 销毁sid会话在数据库内的记录
