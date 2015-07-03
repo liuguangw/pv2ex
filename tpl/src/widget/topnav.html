@@ -1,0 +1,22 @@
+<!--{eval
+		$uid=$session->getUid();
+		$rand=$session->createNewSid();
+		$session->getSessionData()->set('rand', $rand);
+		$userInfo = $user->getUidInfo ( $uid, array (
+				'username',
+				'nickname' 
+		) );
+}-->
+<!--{if $uid==0}-->
+<a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;
+<a href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;
+<a href="/signin" class="top">登录</a>
+<!--{else}-->
+<a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;
+<a href="/member/{$userInfo['username']}" class="top">{$userInfo['nickname']}</a>&nbsp;&nbsp;&nbsp;
+<a href="/notes" class="top">记事本</a>&nbsp;&nbsp;&nbsp;
+<a href="/t" class="top">时间轴</a>&nbsp;&nbsp;&nbsp;
+<a href="/place/{$_SERVER['REMOTE_ADDR']}" class="top">附近</a>&nbsp;&nbsp;&nbsp;
+<a href="/settings" class="top">设置</a>&nbsp;&nbsp;&nbsp;
+<a href="#" onclick="if (confirm('确定要从 V2EX 登出？')) { location.href= '/signout/{$rand}'; }" class="top">登出</a>
+<!--{/if}-->

@@ -33,8 +33,8 @@ class SignIn extends BaseController {
 			$url = '';
 		if (! empty ( $_POST ['username'] ))
 			$username = $_POST ['username'];
-		else 
-			$username='';
+		else
+			$username = '';
 		$title = 'V2EX › 登录';
 		Templatel::tplStart ();
 		include Templatel::view ( '/login.html' );
@@ -57,8 +57,13 @@ class SignIn extends BaseController {
 		$rcode = $sessionData->get ( 'rcode', '' );
 		$sessionData->set ( 'rcode', '' );
 		$urlPost = $postData->get ( 'url', '' );
-		if (! $user->isUsername ( $username ))
-			$errArr [] = $user->getErrMsg ();
+		$loginType = 1;
+		if ($user->isUsername ( $username ))
+			$loginType = 1;
+		elseif ($user->isEmail ( $username ))
+			$loginType = 2;
+		else
+			$errArr [] = '请输入正确的用户名或者邮箱地址';
 		if (! $user->isPass ( $pass ))
 			$errArr [] = $user->getErrMsg ();
 		if ($rcode == '')
@@ -70,20 +75,30 @@ class SignIn extends BaseController {
 			return;
 		}
 		// 判断用户名是否存在
-		if (! $user->isUsernameExists ( $username ))
+		if (($loginType == 1) && ! $user->isUsernameExists ( $username ))
 			$errArr [] = '用户名' . $username . '不存在';
+		if (($loginType == 2) && ! $user->isEmailExists ( $username ))
+			$errArr [] = '邮箱' . $username . '不存在';
 		if (! empty ( $errArr )) {
 			$this->showLoginForm ( '', $errArr );
 			return;
 		}
-		$uid = $user->authPass ( $username, $pass );
+		$uid = $user->authPass ( $username, $pass, $loginType );
 		if ($uid == - 1) {
-			$errArr [] = '用户名或密码错误';
+			if ($loginType == 1)
+				$errArr [] = '用户名或密码错误';
+			elseif ($loginType == 2)
+				$errArr [] = '邮箱或密码错误';
 			$this->showLoginForm ( '', $errArr );
-		}
-		else{
-			$session->setUid($uid);
-			$session->updateLifetime(30*24*3600);
+		} else {
+			$session->setUid ( $uid );
+			$session->updateLifetime ( 30 * 24 * 3600 );
+			$url = $postData->get ( 'url', '' );
+			if (empty ( $url )) {
+				$urlHandler = $this->getApp ()->getUrlHandler ();
+				$url = $urlHandler->createUrl ( 'web/Index', 'index', array (), false );
+			}
+			header ( 'Location: ' . $url );
 		}
 	}
 }

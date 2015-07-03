@@ -81,7 +81,12 @@ class USession {
 		$redis = $this->redis;
 		return $redis->exists ( $this->getSessionRkey ( $sid ) );
 	}
-	private function createNewSid() {
+	/**
+	 * 随机生成32位字符串
+	 * 
+	 * @return string
+	 */
+	public function createNewSid() {
 		$randStr = uniqid ();
 		for($i = 0; $i < 8; $i ++) {
 			$randStr .= ('-' . rand ( 1000, 9999 ));
@@ -162,7 +167,7 @@ class USession {
 	public function updateLifetime($cookieLife) {
 		$this->cookieLife = $cookieLife;
 		if (! $this->isNew) {
-			setcookie ( $this->cookieName, $this->sid, time () + $this->cookieLife );
+			setcookie ( $this->cookieName, $this->sid, time () + $this->cookieLife,'/' );
 			if ($this->dbType == BaseController::DB_MYSQL)
 				$this->updateLifetimeM ( $this->sid, $cookieLife );
 			elseif ($this->dbType == BaseController::DB_REDIS)
@@ -217,7 +222,7 @@ class USession {
 	 * @return void
 	 */
 	private function saveSession($sid) {
-		setcookie ( $this->cookieName, $sid, time () + $this->cookieLife );
+		setcookie ( $this->cookieName, $sid, time () + $this->cookieLife ,'/');
 		if ($this->dbType == BaseController::DB_MYSQL)
 			$this->saveSessionM ( $sid );
 		elseif ($this->dbType == BaseController::DB_REDIS)

@@ -327,26 +327,28 @@ class User {
 	 *
 	 * @param string $username        	
 	 * @param string $pass        	
+	 * @param int $loginType
+	 *        	1表示用户名,2表示邮箱
 	 * @return int 失败时返回-1,正确时返回用户id
 	 */
-	public function authPass($username, $pass) {
-		$encodedPass = $this->encodePass ( $username, $pass );
+	public function authPass($username, $pass, $loginType) {
 		if ($this->dbType == BaseController::DB_MYSQL)
-			return $this->authPassM ( $username, $encodedPass );
+			return $this->authPassM ( $username, $pass, $loginType );
 		elseif ($this->dbType == BaseController::DB_REDIS)
-			return $this->authPassR ( $username, $encodedPass );
+			return $this->authPassR ( $username, $pass, $loginType );
 	}
 	/**
 	 *
 	 * @todo
 	 *
 	 */
-	private function authPassM($username, $pass) {
+	private function authPassM($username, $pass, $loginType) {
 	}
-	private function authPassR($username, $pass) {
-		$redis=$this->redis;
-		$tablePre=$this->tablePre;
-		$lua='-- 获取用户id
+	private function authPassR($username, $pass, $loginType) {
+		$redis = $this->redis;
+		$tablePre = $this->tablePre;
+		if ($loginType == 1) {
+			$lua = '-- 获取用户id
 		local uid=redis.call(\'hget\',ARGV[1]..\'username_uids\',ARGV[2])
 		if uid == false then
 			return -1
@@ -357,6 +359,38 @@ class User {
 		else
 			return -1
 		end';
-		return $redis->eval($lua,array($tablePre,$username,$pass));
+			$encodedPass = $this->encodePass ( $username, $pass );
+			return $redis->eval ( $lua, array (
+					$tablePre,
+					$username,
+					$encodedPass
+			) );
+		} elseif ($loginType == 2) {
+			if(!$redis->hExists($tablePre.'email_uids',$username))
+				return -1;
+			$uid=$redis->hGet($tablePre.'email_uids',$username);
+			$userInfo=$redis->hMget($tablePre.'uid:'.$uid.':userinfo',array('username','pass'));
+			$encodedPass = $this->encodePass ($userInfo['username'], $pass );
+			if($encodedPass==$userInfo['pass'])
+				return $uid;
+			else 
+				return -1;
+		}
+	}
+	public function getUidInfo($uid, array $field = array()) {
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return $this->getUidInfoM ( $uid, $field );
+		elseif ($this->dbType == BaseController::DB_REDIS)
+			return $this->getUidInfoR ( $uid, $field );
+	}
+	private function getUidInfoM($uid, $field) {
+	}
+	private function getUidInfoR($uid, $field) {
+		$redis = $this->redis;
+		$skey = $this->tablePre . 'uid:' . $uid . ':userinfo';
+		if (empty ( $field ))
+			return $redis->hGetAll ( $skey );
+		else
+			return $redis->hMget ( $skey, $field );
 	}
 }
