@@ -63,47 +63,51 @@ class Pv2exUrl implements UrlHandler {
 			) )) {
 				$urlData->set ( $this->cKey, 'web/Install' );
 				$urlData->set ( $this->aKey, 'do' );
-			}
-			elseif (in_array ( $url, array (
+			} elseif (in_array ( $url, array (
 					'/signin',
-					'/signin/'
+					'/signin/' 
 			) )) {
 				$urlData->set ( $this->cKey, 'web/SignIn' );
 				$urlData->set ( $this->aKey, 'index' );
-			}
-			elseif (in_array ( $url, array (
+			} elseif (in_array ( $url, array (
 					'/signin/do',
-					'/signin/do/'
+					'/signin/do/' 
 			) )) {
 				$urlData->set ( $this->cKey, 'web/SignIn' );
 				$urlData->set ( $this->aKey, 'do' );
-			}
-			elseif (in_array ( $url, array (
+			} elseif (in_array ( $url, array (
 					'/signup',
-					'/signup/'
+					'/signup/' 
 			) )) {
 				$urlData->set ( $this->cKey, 'web/SignUp' );
 				$urlData->set ( $this->aKey, 'index' );
-			}
-			elseif (in_array ( $url, array (
+			} elseif (in_array ( $url, array (
 					'/signup/do',
-					'/signup/do/'
+					'/signup/do/' 
 			) )) {
 				$urlData->set ( $this->cKey, 'web/SignUp' );
 				$urlData->set ( $this->aKey, 'do' );
-			}
-			elseif (in_array ( $url, array (
+			} elseif (in_array ( $url, array (
 					'/forgot',
-					'/forgot/'
+					'/forgot/' 
 			) )) {
 				$urlData->set ( $this->cKey, 'web/Forgot' );
 				$urlData->set ( $this->aKey, 'index' );
-			}
-			elseif (preg_match('/^\\/captcha(\\/([^\\/]+\\/?)?)?$/', $url)) {
+			} elseif (preg_match ( '/^\\/captcha(\\/([^\\/]+\\/?)?)?$/', $url )) {
 				$urlData->set ( $this->cKey, 'web/Captcha' );
 				$urlData->set ( $this->aKey, 'index' );
-			}
-			 else {
+			}elseif(preg_match('/^\\/signout\\/([a-z0-9]{32})$/', $url,$data1)){
+				$urlData->set ( $this->cKey, 'web/SignOut' );
+				$urlData->set ( $this->aKey, 'index' );
+				$urlData->set('rand', $data1[1]);
+			}  elseif (in_array ( $url, array (
+					'/new',
+					'/new/' 
+			) )) {
+				$urlData->set ( $this->cKey, 'web/Topic' );
+				$urlData->set ( $this->aKey, 'postNew' );
+			} 
+			else {
 				$urlData->set ( $this->cKey, $this->err404C );
 				$urlData->set ( $this->aKey, $this->defaultA );
 			}
@@ -134,24 +138,35 @@ class Pv2exUrl implements UrlHandler {
 			$url = $url_head . 'install';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
-		}elseif ($cname == 'web/SignIn') {
+		} elseif ($cname == 'web/SignIn') {
 			$url = $url_head . 'signin';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
-		}elseif ($cname == 'web/SignUp') {
+		} elseif ($cname == 'web/SignOut') {
+			$url = $url_head . 'signout';
+			if ($aname == 'index') {
+				$rand = '12345';
+				if (isset ( $data ['rand'] ))
+					$rand = $data ['rand'];
+				$url .= ('/' . $rand);
+			} else
+				$url .= ('/' . $aname);
+		} elseif ($cname == 'web/SignUp') {
 			$url = $url_head . 'signup';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
-		}
-		elseif ($cname == 'web/Forgot') {
+		} elseif ($cname == 'web/Forgot') {
 			$url = $url_head . 'forgot';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
-		}
-		elseif ($cname == 'web/Captcha') {
+		} elseif ($cname == 'web/Captcha') {
 			$url = $url_head . 'captcha';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
+		}elseif ($cname=='web/Topic'){
+			if($aname=='postNew'){
+				$url = $url_head . 'new';
+			}
 		}
 		if ($xmlSafe)
 			$url = str_replace ( '&', '&amp;', $url );

@@ -1,0 +1,185 @@
+<!--{eval 
+		$cssList = array (
+				'/public/css/main.css',
+				'/public/css/select2.min.css' 
+		);
+		$jsList=array(
+			'http://libs.baidu.com/jquery/1.9.0/jquery.js',
+			'/public/js/select2.min.js'
+		);
+}-->
+<!--{include /inc/header.html}-->
+<!--{include /widget/userinfo.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><!--{include /widget/topnav.html}--></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+
+			<div class="sep20"></div>
+			<div class="box">
+				<div class="cell">发帖提示</div>
+				<div class="inner">
+					<ul style="margin-top: 0px;">
+						<li><span class="f13">主题标题</span>
+							<div class="sep10"></div>
+							请在标题中描述内容要点。如果一件事情在标题的长度内就已经可以说清楚，那就没有必要写正文了。
+							<div class="sep10"></div></li>
+						<li><span class="f13">正文</span>
+							<div class="sep10"></div> 可以在正文中为你要发布的主题添加更多细节。V2EX 支持 <span
+							style="font-family: Consolas, 'Panic Sans', mono"><a
+								href="https://help.github.com/articles/github-flavored-markdown"
+								target="_blank">GitHub Flavored Markdown</a></span> 文本标记语法。
+							<div class="sep10"></div> 在正式提交之前，你可以点击本页面左下角的“预览主题”来查看 Markdown
+							正文的实际渲染效果。
+							<div class="sep10"></div></li>
+						<li><span class="f13">选择节点</span>
+							<div class="sep10"></div> 在最后，请为你的主题选择一个节点。恰当的归类会让你发布的信息更加有用。
+							<div class="sep10"></div> 你可以在主题发布后 300 秒内，对标题或者正文进行编辑。同时，在 300
+							秒内，你可以重新为主题选择节点。</li>
+					</ul>
+				</div>
+			</div>
+			<div class="sep20"></div>
+			<div class="box">
+				<div class="cell">社区指导原则</div>
+				<div class="inner">
+					<ul style="margin-top: 0px;">
+						<li><span class="f13">尊重原创</span>
+						<div class="sep10"></div> 请不要在 V2EX 发布任何盗版下载链接，包括软件、音乐、电影等等。V2EX
+							是创意工作者的社区，我们尊重原创。
+							<div class="sep10"></div></li>
+						<li><span class="f13">友好互助</span>
+						<div class="sep10"></div> 保持对陌生人的友善。用知识去帮助别人。</li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		<div id="Main">
+			<div class="sep20"></div>
+			<div class="box">
+
+				<div class="cell">
+					<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+					创作新主题
+				</div>
+				<form method="post" action="/new" id="compose">
+
+					<div class="cell">
+						<div class="fr fade" id="title_remaining">120</div>
+						主题标题
+					</div>
+					<div class="cell" style="padding: 0px; background-color: #fff;">
+						<textarea class="msl" rows="1" maxlength="120" id="topic_title"
+							name="title" autofocus="autofocus"
+							placeholder="请输入主题标题，如果标题能够表达完整内容，则正文可以为空"></textarea>
+					</div>
+					<div class="cell">
+						<div class="fr fade" id="content_remaining">20000</div>
+						正文
+					</div>
+					<div class="cell" style="padding: 0px; background-color: #fff;">
+					<textarea maxlength="20000" id="topic_content" name="content" class="form-control" rows="10"></textarea>
+					</div>
+					<div class="cell">
+						<select name="node_name" id="nodes" style="width: 300px; font-size: 14px;" data-placeholder="请选择一个节点">
+							<option></option>
+
+							<option value="telegram">Telegram / telegram</option>
+
+							<option value="textmate">TextMate / textmate</option>
+
+							<option value="tianjin">天津 / tianjin</option>
+
+							<option value="tornado">Tornado / tornado</option>
+
+							<option value="travel">旅行 / travel</option>
+
+							<option value="treehole">树洞 / treehole</option>
+
+							<option value="tuan">团购 / tuan</option>
+
+							<option value="tv">剧集 / tv</option>
+
+							<option value="twitter">Twitter / twitter</option>
+
+							<option value="typography">字体排印 / typography</option>
+
+							<option value="u">大学 / u</option>
+
+						</select>
+					</div>
+					<div class="cell">
+						最热节点 &nbsp; <a href="javascript:chooseNode('qna')" class="node">问与答</a>
+						&nbsp;<a href="javascript:chooseNode('share')" class="node">分享发现</a>
+						&nbsp;<a href="javascript:chooseNode('all4all')" class="node">二手交易</a>
+						&nbsp;<a href="javascript:chooseNode('jobs')" class="node">酷工作</a>
+						&nbsp;<a href="javascript:chooseNode('programmer')" class="node">程序员</a>
+						&nbsp;<a href="javascript:chooseNode('macosx')" class="node">Mac
+							OS X</a> &nbsp;<a href="javascript:chooseNode('create')" class="node">分享创造</a>
+						&nbsp;<a href="javascript:chooseNode('python')" class="node">Python</a>
+						&nbsp;<a href="javascript:chooseNode('in')" class="node">分享邀请码</a>
+						&nbsp;<a href="javascript:chooseNode('shadowsocks')" class="node">shadowsocks</a>
+						&nbsp;<a href="javascript:chooseNode('iphone')" class="node">iPhone</a>
+						&nbsp;
+					</div>
+					<input type="hidden" name="content" value="" id="topic_content">
+					<input type="hidden" name="once" value="49481">
+				</form>
+				<div class="cell"><div class="fr"><span id="error_message"></span> &nbsp; <input type="button" value="发布主题" class="btn btn-super" onclick="publishTopic();"></div>
+        <button class="btn btn-super" onclick="previewTopic();">预览主题</button>
+    </div>
+
+			</div><!-- /end box -->
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<script type="text/javascript">
+function getWordsFunc(elementId,maxWords){
+	return function(){
+		document.getElementById(elementId).innerHTML=maxWords-this.value.length;
+	}
+}
+function chooseNode(node) {
+    $("#nodes").select2("val", node);
+}
+var titleElement=document.getElementById("topic_title"),
+	titleChangeFn=getWordsFunc("title_remaining",120),
+	contentElement=document.getElementById("topic_content"),
+	contentChangeFn=getWordsFunc("content_remaining",20000);
+titleElement.addEventListener("keyup",titleChangeFn);
+titleElement.addEventListener("change",titleChangeFn);
+contentElement.addEventListener("keyup",contentChangeFn);
+contentElement.addEventListener("change",contentChangeFn);
+$("#nodes").select2();
+</script>
+<!--{include /inc/footer.html}-->

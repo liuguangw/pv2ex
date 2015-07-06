@@ -83,7 +83,7 @@ class USession {
 	}
 	/**
 	 * 随机生成32位字符串
-	 * 
+	 *
 	 * @return string
 	 */
 	public function createNewSid() {
@@ -167,7 +167,7 @@ class USession {
 	public function updateLifetime($cookieLife) {
 		$this->cookieLife = $cookieLife;
 		if (! $this->isNew) {
-			setcookie ( $this->cookieName, $this->sid, time () + $this->cookieLife,'/' );
+			setcookie ( $this->cookieName, $this->sid, time () + $this->cookieLife, '/' );
 			if ($this->dbType == BaseController::DB_MYSQL)
 				$this->updateLifetimeM ( $this->sid, $cookieLife );
 			elseif ($this->dbType == BaseController::DB_REDIS)
@@ -175,20 +175,21 @@ class USession {
 		}
 	}
 	/**
-	 * 
-	 *  @todo
+	 *
+	 * @todo
+	 *
 	 */
-	private function updateLifetimeM($sid,$cookieLife){
-		
+	private function updateLifetimeM($sid, $cookieLife) {
 	}
 	/**
-	 * 
-	 *  @todo
+	 *
+	 * @todo
+	 *
 	 */
-	private function updateLifetimeR($sid,$cookieLife){
-		$redis=$this->redis;
-		$skey=$this->getSessionRkey($sid);
-		$redis->expire($skey,$cookieLife);
+	private function updateLifetimeR($sid, $cookieLife) {
+		$redis = $this->redis;
+		$skey = $this->getSessionRkey ( $sid );
+		$redis->expire ( $skey, $cookieLife );
 	}
 	/**
 	 * 销毁sid会话在数据库内的记录
@@ -202,6 +203,7 @@ class USession {
 			$this->destroySessionM ( $sid );
 		elseif ($this->dbType == BaseController::DB_REDIS)
 			$this->destroySessionR ( $sid );
+		setcookie ( $this->cookieName, $sid, time () - $this->cookieLife, '/' );
 	}
 	/**
 	 *
@@ -222,7 +224,7 @@ class USession {
 	 * @return void
 	 */
 	private function saveSession($sid) {
-		setcookie ( $this->cookieName, $sid, time () + $this->cookieLife ,'/');
+		setcookie ( $this->cookieName, $sid, time () + $this->cookieLife, '/' );
 		if ($this->dbType == BaseController::DB_MYSQL)
 			$this->saveSessionM ( $sid );
 		elseif ($this->dbType == BaseController::DB_REDIS)

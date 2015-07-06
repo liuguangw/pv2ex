@@ -1,0 +1,10 @@
+<!--{eval
+		$uid=$session->getUid();
+		$rand=$session->createNewSid();
+		$session->getSessionData()->set('rand', $rand);
+		$userInfo = $user->getUidInfo ( $uid, array (
+				'username',
+				'nickname' ,
+				'user_img'
+		) );
+}-->

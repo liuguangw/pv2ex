@@ -5,15 +5,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>{$title}</title>
-	<!--{eval 
-		$cssList = array (
-				'/public/css/main.css',
-				'/public/css/font-awesome.min.css' 
+	<!--{if empty($cssList)}-->
+		<!--{eval 
+			$cssList = array (
+					'/public/css/main.css',
+					'/public/css/font-awesome.min.css' 
 		);}-->
-	<!--{if !(empty($cssList))}-->
+	<!--{/if}-->
 		<!--{loop $cssList $cssSrc}-->
 	<link rel="stylesheet" type="text/css" media="screen"  href="{$cssSrc}" />
 		<!--{/loop}-->
-	<!--{/if}-->
 </head>
 <body>

@@ -1,0 +1,76 @@
+<!--{include /inc/header.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;<a
+						href="/signin" class="top">登录</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+		<!--{include /widget/login.html}-->
+		</div>
+		<div id="Main">
+			<div class="sep20"></div>
+			<div class="box">
+				
+			<div class="header">
+					<a href="/">V2EX</a> <span class="chevron">&nbsp;›&nbsp;</span>
+					登录&nbsp;
+			</div>
+			<!--{if !$loginOutOk}-->
+			<div class="msg msg-problem">登出失败：
+				<ul>
+				<li>验证失败,请重试.</li>
+				</ul>
+			</div>
+			<!--{/if}-->
+			<!--{if $loginOutOk}-->
+			<div class="inner">你已经完全登出，没有任何个人信息留在这台电脑上。
+		      <div class="sep20"></div>
+		      <input type="button" class="btn btn-super" onclick="location.href = '/signin';" value="重新登录">
+		    </div>
+		    <!--{else}-->
+		    <div class="inner">登出失败，请重试。
+		      <div class="sep20"></div>
+		      <input type="button" class="btn btn-super" onclick="location.href = '/';" value="返回首页">
+		    </div>
+		    <!--{/if}-->
+
+			</div><!-- /end box -->
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<script type="text/javascript">
+function reloadCaptch(captchaElement){
+	var imgUrl="{$captchaUrlT}".replace("--rand--",Math.random());
+	captchaElement.src=imgUrl;
+}
+</script>
+<!--{include /inc/footer.html}-->

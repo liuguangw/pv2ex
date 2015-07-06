@@ -1,12 +1,3 @@
-<!--{eval
-		$uid=$session->getUid();
-		$rand=$session->createNewSid();
-		$session->getSessionData()->set('rand', $rand);
-		$userInfo = $user->getUidInfo ( $uid, array (
-				'username',
-				'nickname' 
-		) );
-}-->
 <!--{if $uid==0}-->
 <a href="/" class="top">首页</a>&nbsp;&nbsp;&nbsp;
 <a href="/signup" class="top">注册</a>&nbsp;&nbsp;&nbsp;

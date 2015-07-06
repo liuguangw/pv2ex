@@ -1,4 +1,5 @@
 <div class="sep20"></div>
+<!--{if empty($uid)}-->
 <div class="box">
 	<div class="cell">
 		<strong>V2EX = way to explore</strong>
@@ -15,3 +16,65 @@
 		</div>
 	</div>
 </div>
+<!--{else}-->
+<div class="box">
+	<div class="cell">
+		<table id="userPanelHead" class="userPanel">
+			<tr>
+				<td><a href="/member/{$userInfo['username']}"><img
+						src="{$userInfo['user_img']}"
+						class="avatar" /></a></td>
+				<td></td>
+				<td><span class="bigger"><a href="/member/{$userInfo['username']}">{$userInfo['nickname']}</a></span></td>
+			</tr>
+		</table>
+		<div class="sep10"></div>
+		<table id="userShouCang" class="userPanel">
+			<tr>
+				<td><a href="/my/nodes" class="dark" style="display: block;"><span
+						class="bigger">0</span>
+						<div class="sep3"></div> <span class="fade">节点收藏</span></a></td>
+				<td><a href="/my/topics" class="dark" style="display: block;"><span
+						class="bigger">0</span>
+						<div class="sep3"></div> <span class="fade">主题收藏</span></a></td>
+				<td><a href="/my/following" class="dark"
+					style="display: block;"><span class="bigger">0</span>
+						<div class="sep3"></div> <span class="fade">特别关注</span></a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="cell">
+		<div id="expline">
+			<div style="width: 10px;"></div>
+		</div>
+	</div>
+
+	<div class="cell" id="postNew">
+		<table class="userPanel">
+			<tr>
+				<td><a href="/new"><img src="/public/img/write_new.png" /></a></td>
+				<td></td>
+				<td><a href="/new">创作新主题</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="inner">
+		<div class="fr" id="money">
+			<a href="/balance" class="balance_area">20 <img
+				src="//cdn.v2ex.com/static/img/silver.png" alt="S" align="absmiddle"
+				border="0" style="padding-bottom: 2px;"> 51 <img
+				src="//cdn.v2ex.com/static/img/bronze.png" alt="B" align="absmiddle"
+				border="0"></a>
+		</div>
+		<a href="/notifications" class="fade">0 条未读提醒</a>
+	</div>
+
+</div>
+<div class="sep20"></div>
+<div class="box">
+	<div class="inner">
+		<li class="fa fa-gift" style="color: #f90;"></li> &nbsp;<a
+			href="/mission/daily">领取今日的登录奖励</a>
+	</div>
+</div>
+<!--{/if}-->
