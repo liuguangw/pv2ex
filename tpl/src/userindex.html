@@ -1,0 +1,115 @@
+<!--{include /inc/header.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><!--{include /widget/topnav.html}--></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+			<!--{if $isAdmin}-->
+			<div class="sep20"></div>
+			<div class="box">
+				<div class="cell">
+				<i class="fa fa-user"></i>  <a href="/hadmin">进入后台管理中心</a>
+				</div>
+			</div>
+			<!--{/if}-->
+			<div class="sep20"></div>
+			<div class="box">
+			    <div class="cell">
+			    	<img src="/public/img/neue_comment.png" width="18" align="absmiddle"> &nbsp;{$userInfo['nickname']} 最近的时间轴更新
+			    </div>
+			    <div id="statuses">  
+			    </div>    
+			</div>
+			<div class="sep20"></div>
+
+		</div>
+		<div id="Main">
+			<div class="sep20"></div>
+
+			<div class="box">
+				<div class="cell">
+					<table cellpadding="0" cellspacing="0" border="0" width="100%">
+						<tr>
+							<td width="73" valign="top" align="center"><img
+								src="{$userInfo['user_img']}"
+								class="avatar" border="0" align="default">
+							<div class="sep10"></div>
+								<strong class="online">ONLINE</strong></td>
+							<td width="10"></td>
+							<td width="auto" valign="top" align="left">
+								<div class="fr"></div>
+								<h1 style="margin-bottom: 5px;">{$userInfo['nickname']}</h1>
+								
+								<div class="sep10"></div> <span class="gray"><i class="fa fa-time"></i> &nbsp; V2EX 第 {$uid} 号会员，加入于
+									<!--{eval echo date('Y-m-d H:i:s P',$userInfo['regtime']);}--></span>
+
+							</td>
+						</tr>
+					</table>
+					<div class="sep5"></div>
+				</div>
+
+				<div class="cell markdown_body"></div>
+
+			</div>
+			<div class="sep20"></div>
+			<div class="box">
+				<div class="cell_tabs">
+					<div class="fl">
+						<img
+							src="{$userInfo['user_img']}"
+							width="24" style="border-radius: 24px; margin-top: -2px;"
+							border="0">
+					</div>
+					<a href="/member/{$userInfo['username']}" class="cell_tab_current">{$userInfo['nickname']}
+						创建的所有主题</a><a href="/member/{$userInfo['username']}/qna" class="cell_tab">提问</a><a
+						href="/member/{$userInfo['username']}/tech" class="cell_tab">技术话题</a><a
+						href="/member/{$userInfo['username']}/play" class="cell_tab">好玩</a><a
+						href="/member/{$userInfo['username']}/jobs" class="cell_tab">工作信息</a><a
+						href="/member/{$userInfo['username']}/deals" class="cell_tab">交易信息</a><a
+						href="/member/{$userInfo['username']}/city" class="cell_tab">城市相关</a>
+				</div>
+			</div>
+			<div class="sep20"></div>
+			<div class="box">
+				<div class="inner">
+					<span class="gray">{$userInfo['nickname']} 最近回复了</span>
+				</div>
+				<div class="inner">
+					<span class="chevron">»</span> <a href="/member/{$userInfo['username']}/replies">{$userInfo['nickname']}
+						创建的更多回复</a>
+				</div>
+			</div>
+
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<!--{include /inc/footer.html}-->

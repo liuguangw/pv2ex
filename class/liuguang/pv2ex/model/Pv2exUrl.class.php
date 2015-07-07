@@ -96,18 +96,29 @@ class Pv2exUrl implements UrlHandler {
 			} elseif (preg_match ( '/^\\/captcha(\\/([^\\/]+\\/?)?)?$/', $url )) {
 				$urlData->set ( $this->cKey, 'web/Captcha' );
 				$urlData->set ( $this->aKey, 'index' );
-			}elseif(preg_match('/^\\/signout\\/([a-z0-9]{32})$/', $url,$data1)){
+			} elseif (preg_match ( '/^\\/signout\\/([a-z0-9]{32})$/', $url, $data1 )) {
 				$urlData->set ( $this->cKey, 'web/SignOut' );
 				$urlData->set ( $this->aKey, 'index' );
-				$urlData->set('rand', $data1[1]);
-			}  elseif (in_array ( $url, array (
+				$urlData->set ( 'rand', $data1 [1] );
+			} elseif (in_array ( $url, array (
 					'/new',
 					'/new/' 
 			) )) {
 				$urlData->set ( $this->cKey, 'web/Topic' );
 				$urlData->set ( $this->aKey, 'postNew' );
-			} 
-			else {
+			} elseif (preg_match ( '/^\\/member\\/([^\\/]+)(\\/([^\\/]+))?$/', $url, $data1 )) {
+				$urlData->set ( $this->cKey, 'web/UserCenter' );
+				$urlData->set ( $this->aKey, 'index' );
+				$urlData->set ( 'username', $data1 [1] );
+				if(isset($data1[3]))
+					$urlData->set ( $this->aKey, $data1[3]);
+			}elseif (preg_match ( '/^\\/hadmin(\\/([^\\/]+))?$/', $url, $data1 )) {
+				$urlData->set ( $this->cKey, 'web/Admin' );
+				$urlData->set ( $this->aKey, 'index' );
+				if(isset($data1[1]))
+					$urlData->set ( $this->aKey, $data1[1]);
+			}
+			 else {
 				$urlData->set ( $this->cKey, $this->err404C );
 				$urlData->set ( $this->aKey, $this->defaultA );
 			}
@@ -163,10 +174,19 @@ class Pv2exUrl implements UrlHandler {
 			$url = $url_head . 'captcha';
 			if ($aname != 'index')
 				$url .= ('/' . $aname);
-		}elseif ($cname=='web/Topic'){
-			if($aname=='postNew'){
+		} elseif ($cname == 'web/Topic') {
+			if ($aname == 'postNew') {
 				$url = $url_head . 'new';
 			}
+		} elseif ($cname == 'web/UserCenter') {
+			$url = $url_head . 'member/' . $data ['username'];
+			if ($aname != 'index') {
+				$url .= ('/'.$aname);
+			}
+		} elseif ($cname == 'web/Admin') {
+			$url = $url_head . 'hadmin';
+			if ($aname != 'index')
+				$url .= ('/' . $aname);
 		}
 		if ($xmlSafe)
 			$url = str_replace ( '&', '&amp;', $url );

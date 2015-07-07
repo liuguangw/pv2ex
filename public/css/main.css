@@ -29,6 +29,14 @@ ol {
 img{
 	border: 0;
 }
+h1 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 150%;
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+	word-wrap: break-word;
+}
 /*链接样式*/
 a:link, a:visited, a:active {
     color: #778087;
@@ -75,6 +83,10 @@ a:hover {
 .content {
     width: 970px;
     margin: 0px auto;
+}
+/*左浮动*/
+.fl {
+    float: left;
 }
 /*左中右*/
 #Leftbar {
@@ -596,4 +608,54 @@ a.balance_area:hover {
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+/*online 标签*/
+.online {
+    color: #fff;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: 500;
+    padding: 2px 5px 2px 5px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    
+    background: #52bf1c;
+    background: -moz-linear-gradient(top, #52bf1c 0%, #438906 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#52bf1c), color-stop(100%,#438906));
+    background: -webkit-linear-gradient(top, #52bf1c 0%,#438906 100%);
+    background: -o-linear-gradient(top, #52bf1c 0%,#438906 100%);
+    background: -ms-linear-gradient(top, #52bf1c 0%,#438906 100%);
+    background: linear-gradient(top, #52bf1c 0%,#438906 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#52bf1c', endColorstr='#438906',GradientType=0 );
+}
+/*用户区的tab标签*/
+.cell_tabs {
+    padding: 10px 10px 0px 10px;
+    border-bottom: 1px solid #e2e2e2;
+    text-align: center;
+}
+.cell_tab:link, .cell_tab:visited {
+    font-size: 14px;
+    border-bottom: 3px solid transparent;
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 15px;
+    padding: 0px 5px 5px 5px;
+    color: #99a;
+}
+
+.cell_tab:hover {
+    color: #778087;
+    border-bottom: 3px solid #f0f0f0;
+}
+
+.cell_tab_current:link, .cell_tab_current:visited  {
+    font-size: 14px;
+    border-bottom: 3px solid #778087;
+    display: inline-block;
+    text-decoration: none;
+    margin-right: 15px;
+    padding: 0px 5px 5px 5px;
 }
