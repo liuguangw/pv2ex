@@ -1,0 +1,61 @@
+<!--{include /widget/userinfo.html}-->
+<!--{include /inc/header.html}-->
+<div id="Top">
+	<div class="content">
+		<div style="padding-top: 6px;">
+			<table>
+				<tr>
+					<td><a href="/" title="way to explore">
+							<div class="top-logo"></div>
+					</a></td>
+					<td>
+						<div id="Search">
+							<form onsubmit="return dispatch()">
+								<div>
+									<input type="text" maxlength="40" name="q" id="q" value="" />
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><!--{include /widget/topnav.html}--></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div id="Wrapper">
+	<div class="content">
+
+		<div id="Leftbar"></div>
+		<div id="Rightbar">
+			<!--{include /admin/navbar.html}-->
+		</div>
+		<div id="Main">
+		</div>
+		<!-- /end main -->
+
+	</div>
+	<div class="clear-b"></div>
+	<div class="sep20"></div>
+</div>
+<!--{include /inc/bottom.html}-->
+<!--{include /jslib/jquery.html}-->
+<script type="text/javascript" src="/public/js/admin.js"></script>
+<script type="text/javascript">
+var dbTypeStr="{$dbTypeStr}",
+	sitename="{$siteInfo['sitename']}",
+	dbBgSave={$dbBgSave},
+	dbTypeStr="{$dbTypeStr}";
+$(document).ready(function(){
+	switchNavbar(0);
+	showAdminForm(0);
+	/*右侧导航条栏目响应*/
+	$("div.box>a.list-group-item").each(function(index){
+		$(this).click(function(){
+			switchNavbar(index);
+			showAdminForm(index);
+		});
+	});
+});
+</script>
+<!--{include /inc/footer.html}-->

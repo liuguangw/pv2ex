@@ -23,6 +23,12 @@ class SignUp extends BaseController {
 	 */
 	public function indexAction() {
 		$this->forceInstall ();
+		$session = new USession ( $this );
+		//判断用户是否已登录
+		if($session->getUid()!=0){
+			header('Location: /');
+			return;
+		}
 		$this->showRegForm ();
 	}
 	
@@ -33,14 +39,19 @@ class SignUp extends BaseController {
 	 */
 	public function doAction() {
 		$this->forceInstall ();
+		$session = new USession ( $this );
+		$sessionData = $session->getSessionData ();
+		//判断用户是否已登录
+		if($session->getUid()!=0){
+			header('Location: /');
+			return;
+		}
 		if ($_SERVER ['REQUEST_METHOD'] != 'POST') {
 			$this->showRegForm ();
 			return;
 		}
 		$postData = new DataMap ( $_POST );
 		$user = new UserModel ( $this );
-		$session = new USession ( $this );
-		$sessionData = $session->getSessionData ();
 		$errArr = array ();
 		$username = $postData->get ( 'username', '' );
 		$nickname = $postData->get ( 'nickname', '' );

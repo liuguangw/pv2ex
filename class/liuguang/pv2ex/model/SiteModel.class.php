@@ -31,17 +31,74 @@ class SiteModel {
 			return $this->getSiteInfoR ( $fields );
 	}
 	/**
-	 * @todo 
+	 *
+	 * @todo
+	 *
 	 */
-	private function getSiteInfoM ( $fields ) {
-		
+	private function getSiteInfoM($fields) {
 	}
-	private function getSiteInfoR( $fields ) {
-		$redis=$this->redis;
-		$tablePre=$this->tablePre;
-		if(empty($fields))
-			return $redis->hGetAll($tablePre.'site_confs');
+	private function getSiteInfoR($fields) {
+		$redis = $this->redis;
+		$tablePre = $this->tablePre;
+		if (empty ( $fields ))
+			return $redis->hGetAll ( $tablePre . 'site_confs' );
 		else
-			return $redis->hMget($tablePre.'site_conf',$fields);
+			return $redis->hMget ( $tablePre . 'site_conf', $fields );
+	}
+	/**
+	 * 获取数据库服务器状态
+	 *
+	 * @return array
+	 */
+	public function getSiteStat() {
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return $this->getSiteStatM ();
+		elseif ($this->dbType == BaseController::DB_REDIS)
+			return $this->getSiteStatR ();
+	}
+	/**
+	 *
+	 * @todo
+	 *
+	 */
+	private function getSiteStatM() {
+		;
+	}
+	private function getSiteStatR() {
+		$result = array ();
+		$redis = $this->redis;
+		$lastSave = $redis->lastSave ();
+		$result ['last_save'] = date ( 'Y-m-d H:i:s P', $lastSave );
+		$result ['dbsize'] = $redis->dbSize ();
+		$clientInfo = $redis->info ();
+		foreach ( $clientInfo as $key => $value ) {
+			$result [$key] = $value;
+		}
+		return $result;
+	}
+	/**
+	 * 判断当前数据库是否有后台异步保存功能
+	 *
+	 * @return boolean
+	 */
+	public function hasBgSave() {
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return false;
+		elseif ($this->dbType == BaseController::DB_REDIS)
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * redis后台保存数据(当数据库为redis时有效)
+	 *
+	 * @return void
+	 */
+	public function saveDb() {
+		if ($this->dbType == BaseController::DB_REDIS)
+			$this->saveDbR ();
+	}
+	private function saveDbR() {
+		$this->redis->bgSave ();
 	}
 }

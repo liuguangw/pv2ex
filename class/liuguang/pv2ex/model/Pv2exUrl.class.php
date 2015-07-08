@@ -116,7 +116,7 @@ class Pv2exUrl implements UrlHandler {
 				$urlData->set ( $this->cKey, 'web/Admin' );
 				$urlData->set ( $this->aKey, 'index' );
 				if(isset($data1[1]))
-					$urlData->set ( $this->aKey, $data1[1]);
+					$urlData->set ( $this->aKey, $data1[2]);
 			}
 			 else {
 				$urlData->set ( $this->cKey, $this->err404C );

@@ -62,6 +62,14 @@ class BaseController {
 	public function getDbType() {
 		return $this->dbType;
 	}
+	public function getDbTypeStr() {
+		if ($this->dbType == self::DB_MYSQL)
+			return 'mysql';
+		elseif ($this->dbType == self::DB_REDIS)
+			return 'redis';
+		else
+			return 'undefined';
+	}
 	
 	/**
 	 * 获取redis实例
@@ -149,5 +157,9 @@ class BaseController {
 			header ( 'Location: ' . $urlHandler->createUrl ( 'web/Install', 'index', array (), false ) );
 			exit ();
 		}
+	}
+	public function jsonReturn(array $arr) {
+		header ( 'Content-type: application/json; charse=utf-8' );
+		echo json_encode ( $arr );
 	}
 }
