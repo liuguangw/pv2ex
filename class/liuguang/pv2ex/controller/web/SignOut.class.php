@@ -5,6 +5,8 @@ namespace liuguang\pv2ex\controller\web;
 use liuguang\pv2ex\model\BaseController;
 use liuguang\pv2ex\model\USession;
 use liuguang\mvc\Templatel;
+use liuguang\pv2ex\model\SiteModel;
+
 class SignOut extends BaseController {
 	public function indexAction() {
 		$this->forceInstall ();
@@ -18,7 +20,9 @@ class SignOut extends BaseController {
 			$loginOutOk=($sessionRand==$urlRand);
 		if($loginOutOk)
 			$session->destroy();
-		$title='V2EX › 登出';
+		$siteInfoM=new SiteModel($this);
+		$siteInfo=$siteInfoM->getSiteInfo(array('sitename'));
+		$title = $siteInfo['sitename'].' › 登出';
 		Templatel::tplStart ();
 		include Templatel::view ( '/logout.html' );
 		Templatel::tplEnd ();

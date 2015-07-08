@@ -6,6 +6,7 @@ use liuguang\pv2ex\model\BaseController;
 use liuguang\pv2ex\model\USession;
 use liuguang\pv2ex\model\User as UserModel;
 use liuguang\mvc\Templatel;
+use liuguang\pv2ex\model\SiteModel;
 
 class UserCenter extends BaseController {
 	public function indexAction() {
@@ -30,7 +31,9 @@ class UserCenter extends BaseController {
 		) );
 		$isAdmin=$user->isSuperAdmin($uid);
 		$session = null;
-		$title = 'V2EX › ' . $userInfo ['nickname'];
+		$siteInfoM=new SiteModel($this);
+		$siteInfo=$siteInfoM->getSiteInfo(array('sitename'));
+		$title = $siteInfo['sitename'].' › '. $userInfo ['nickname'];
 		Templatel::tplStart ();
 		include Templatel::view ( '/userindex.html' );
 		Templatel::tplEnd ();

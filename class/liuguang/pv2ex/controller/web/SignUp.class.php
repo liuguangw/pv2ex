@@ -7,7 +7,7 @@ use liuguang\mvc\Templatel;
 use liuguang\mvc\DataMap;
 use liuguang\pv2ex\model\User as UserModel;
 use liuguang\pv2ex\model\USession;
-use liuguang\mvc\liuguang\mvc;
+use liuguang\pv2ex\model\SiteModel;
 
 /**
  * 显示注册页面,处理用户注册
@@ -100,7 +100,9 @@ class SignUp extends BaseController {
 		$doRegUrl = $urlHandler->createUrl ( 'web/SignUp', 'do', array () );
 		$captchaUrl = $urlHandler->createUrl ( 'web/Captcha', 'index', array () );
 		$captchaUrlT = $urlHandler->createUrl ( 'web/Captcha', '--rand--', array (), false );
-		$title = 'V2EX › 注册';
+		$siteInfoM=new SiteModel($this);
+		$siteInfo=$siteInfoM->getSiteInfo(array('sitename'));
+		$title = $siteInfo['sitename'].' › 注册';
 		$postData = new DataMap ( $_POST );
 		$username = $postData->get ( 'username', '' );
 		$nickname = $postData->get ( 'nickname', '' );
@@ -117,7 +119,9 @@ class SignUp extends BaseController {
 	private function showRegOk($uid){
 		$urlHandler = $this->getApp ()->getUrlHandler ();
 		$loginUrl = $urlHandler->createUrl ( 'web/SignIn', 'index', array () );
-		$title = 'V2EX › 注册';
+		$siteInfoM=new SiteModel($this);
+		$siteInfo=$siteInfoM->getSiteInfo(array('sitename'));
+		$title = $siteInfo['sitename'].' › 注册';
 		Templatel::tplStart ();
 		include Templatel::view ( '/regok.html' );
 		Templatel::tplEnd ();

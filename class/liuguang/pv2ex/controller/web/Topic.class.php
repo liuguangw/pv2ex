@@ -6,6 +6,7 @@ use liuguang\pv2ex\model\BaseController;
 use liuguang\pv2ex\model\USession;
 use liuguang\mvc\Templatel;
 use liuguang\pv2ex\model\User as UserModel;
+use liuguang\pv2ex\model\SiteModel;
 
 class Topic extends BaseController {
 	public function postNewAction() {
@@ -18,7 +19,9 @@ class Topic extends BaseController {
 			header ( 'Location: ' . $signInUrl );
 			return;
 		}
-		$title = 'V2EX › 创作新主题';
+		$siteInfoM=new SiteModel($this);
+		$siteInfo=$siteInfoM->getSiteInfo(array('sitename'));
+		$title = $siteInfo['sitename'].' › 创建新主题';
 		$user = new UserModel ( $this );
 		Templatel::tplStart ();
 		include Templatel::view ( '/postnew.html' );

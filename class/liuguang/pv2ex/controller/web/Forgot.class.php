@@ -4,6 +4,7 @@ namespace liuguang\pv2ex\controller\web;
 
 use liuguang\pv2ex\model\BaseController;
 use liuguang\mvc\Templatel;
+use liuguang\pv2ex\model\SiteModel;
 
 /**
  * 找回密码
@@ -16,7 +17,9 @@ class Forgot extends BaseController {
 		$this->forceInstall ();
 		$urlHandler = $this->getApp ()->getUrlHandler ();
 		$doResetUrl = $urlHandler->createUrl ( 'web/Forgot', 'do', array () );
-		$title = 'V2EX › 找回密码';
+		$siteInfoM=new SiteModel($this);
+		$siteInfo=$siteInfoM->getSiteInfo(array('sitename'));
+		$title = $siteInfo['sitename'].' › 找回密码';
 		Templatel::tplStart ();
 		include Templatel::view ( '/forgot.html' );
 		Templatel::tplEnd ();

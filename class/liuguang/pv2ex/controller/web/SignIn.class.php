@@ -7,6 +7,7 @@ use liuguang\mvc\Templatel;
 use liuguang\mvc\DataMap;
 use liuguang\pv2ex\model\User as UserModel;
 use liuguang\pv2ex\model\USession;
+use liuguang\pv2ex\model\SiteModel;
 
 /**
  * 显示登录页面,处理用户登录
@@ -35,7 +36,9 @@ class SignIn extends BaseController {
 			$username = $_POST ['username'];
 		else
 			$username = '';
-		$title = 'V2EX › 登录';
+		$siteInfoM=new SiteModel($this);
+		$siteInfo=$siteInfoM->getSiteInfo(array('sitename'));
+		$title = $siteInfo['sitename'].' › 登录';
 		Templatel::tplStart ();
 		include Templatel::view ( '/login.html' );
 		Templatel::tplEnd ();
