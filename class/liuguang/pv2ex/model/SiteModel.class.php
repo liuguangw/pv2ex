@@ -41,7 +41,7 @@ class SiteModel {
 		$redis = $this->redis;
 		$tablePre = $this->tablePre;
 		if (empty ( $fields ))
-			return $redis->hGetAll ( $tablePre . 'site_confs' );
+			return $redis->hGetAll ( $tablePre . 'site_conf' );
 		else
 			return $redis->hMget ( $tablePre . 'site_conf', $fields );
 	}

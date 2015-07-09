@@ -91,6 +91,32 @@ class Admin extends BaseController{
 		$this->jsonReturn($result);
 	}
 	/**
+	 * 返回json格式的网站配置设置
+	 * 
+	 * @return void
+	 */
+	public function siteSetsAction(){
+		$this->forceInstall ();
+		$session = new USession ( $this );
+		$uid = $session->getUid ();
+		$urlHandler = $this->getApp ()->getUrlHandler ();
+		if ($uid == 0) {
+			$signInUrl = $urlHandler->createUrl ( 'web/SignIn', 'index', array () );
+			header ( 'Location: ' . $signInUrl );
+			return;
+		}
+		$user = new UserModel ( $this );
+		$isAdmin=$user->isSuperAdmin($uid);
+		if(!$isAdmin){
+			$this->needAdmin();
+			return;
+		}
+		$siteInfoM=new SiteModel($this);
+		$result=$siteInfoM->getSiteInfo(array());
+		$result['create_time']=date('Y-m-d H:i:s P',$result['create_time']);
+		$this->jsonReturn($result);
+	}
+	/**
 	 * 显示权限不足的提示页面
 	 * 
 	 * @return void

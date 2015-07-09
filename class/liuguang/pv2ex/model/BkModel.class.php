@@ -120,7 +120,9 @@ class BkModel {
 		$redis = $this->redis;
 		$tablePre = $this->tablePre;
 		$keyStr = $tablePre . 'bkid:' . $bkid . ':children';
-		if ($limit == 0)
+		if(!$redis->exists($keyStr))
+			return array();
+		if($limit == 0)
 			return $redis->zRange ( $keyStr, 0, - 1 );
 		else
 			return $redis->zRange ( $keyStr, 0, $limit - 1 );

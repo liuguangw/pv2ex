@@ -17,9 +17,10 @@ function switchNavbar(navbarId){
  * @return void
  */
 function showAdminForm(navid){
-	if(navid==0){
+	if(navid==0)
 		showAdminIndex();
-	}
+	else if(navid==1)
+		showAdminSets();
 }
 function bgSaveDb(){
 	$.ajax({
@@ -109,12 +110,105 @@ function showAdminSets(){
 					<a href="/">'+sitename+'</a> <span class="chevron">&nbsp;›&nbsp;</span>\
 					站点设置&nbsp;\
 			</div>';
-	$(boxElementContent).append("<div class=\"inner\">"+dbTypeStr+"服务器状态</div>");
+	$(boxElementContent).append("<div class=\"inner\">"+dbTypeStr+"站点设置</div>");
 	$.ajax({
 		"type":"POST",
 		"url":"/hadmin/siteSets",
 		"dataType":"json",
 		"success":function(data){
+			var innerDiv=document.createElement("div");
+			innerDiv.className="inner";
+			var severInfoTb=document.createElement("table"),trTmp,tnode;
+			innerDiv.appendChild(severInfoTb);
+			boxElementContent.appendChild(innerDiv);
+			
+			trTmp=severInfoTb.insertRow();
+			tnode=trTmp.insertCell(0);
+			tnode.innerHTML="网站名称";
+			tnode=trTmp.insertCell(1);
+			tnode.innerHTML="<input type=\"text\" id=\"sitename\" value=\""+data.sitename+"\" />";
+			
+			trTmp=severInfoTb.insertRow();
+			tnode=trTmp.insertCell(0);
+			tnode.innerHTML="创建时间";
+			tnode=trTmp.insertCell(1);
+			tnode.innerHTML=data.create_time;
+			
+			trTmp=severInfoTb.insertRow();
+			tnode=trTmp.insertCell(0);
+			tnode.innerHTML="是否显示公告";
+			tnode=trTmp.insertCell(1);
+			if(data.notice_on==1)
+				tnode.innerHTML="<select id=\"notice_on\">\
+						<option value=\"1\" selected=\"selected\">显示</option>\
+						<option value=\"0\">不显示</option>\
+						</select>";
+			else
+				tnode.innerHTML="<select id=\"notice_on\">\
+					<option value=\"1\">显示</option>\
+					<option value=\"0\" selected=\"selected\">不显示</option>\
+					</select>";
+			
+			trTmp=severInfoTb.insertRow();
+			tnode=trTmp.insertCell(0);
+			tnode.innerHTML="广告文本";
+			tnode=trTmp.insertCell(1);
+			tnode.innerHTML="<textarea id=\"sitename\">"+data.notice_text+"</textarea>";
+			
+			trTmp=severInfoTb.insertRow();
+			tnode=trTmp.insertCell(0);
+			tnode.innerHTML="是否开启压缩功能";
+			tnode=trTmp.insertCell(1);
+			if(data.open_compress==1)
+				tnode.innerHTML="<select id=\"open_compress\">\
+						<option value=\"1\" selected=\"selected\">开启压缩</option>\
+						<option value=\"0\">关闭压缩</option>\
+						</select>";
+			else
+				tnode.innerHTML="<select id=\"open_compress\">\
+					<option value=\"1\">开启压缩</option>\
+					<option value=\"0\" selected=\"selected\">关闭压缩</option>\
+					</select>";
+			
+			trTmp=severInfoTb.insertRow();
+			tnode=trTmp.insertCell(0);
+			tnode.innerHTML="保存修改";
+			tnode=trTmp.insertCell(1);
+			tnode.innerHTML="<button type=\"button\" class=\"btn btn-super\" onclick=\"saveSiteConf();\">修改配置</button>"
+		},
+		"error":function(){
+			
+		}
+	});
+}
+/**
+ * 显示节点分支编辑页面
+ * 
+ * @return void
+ */
+function showBkTree(){
+	var sep20=document.createElement("div"),
+	mainDiv=document.getElementById("Main"),
+	boxElement=sep20.cloneNode();
+	mainDiv.innerHTML='';
+	sep20.className="sep20";
+	mainDiv.appendChild(sep20);
+	mainDiv.appendChild(boxElement);
+	mainDiv.appendChild(sep20.cloneNode());
+	boxElement.className="box";
+	var boxElementContent=boxElement.cloneNode();
+	mainDiv.appendChild(boxElementContent);
+	boxElement.innerHTML='<div class="header">\
+					<a href="/">'+sitename+'</a> <span class="chevron">&nbsp;›&nbsp;</span>\
+					站点设置&nbsp;\
+			</div>';
+	$(boxElementContent).append("<div class=\"inner\">"+dbTypeStr+"站点设置</div>");
+	$.ajax({
+		"type":"POST",
+		"url":"/hadmin/siteSets",
+		"dataType":"json",
+		"success":function(data){
+			
 		},
 		"error":function(){
 			
