@@ -55,13 +55,48 @@ class BkModel {
 	private function createBkR($pid, $bkname, $isBk, $isOpen, $needLogin) {
 		$redis = $this->redis;
 		$tablePre = $this->tablePre;
-		$lua='-- 获取板块id
+		$lua = '-- 获取板块id
 		local bkid=redis.call(\'hincrby\',ARGV[1]..\'counter\',\'bkid\',1)
 		-- 设置板块节点的父节点
 		redis.call(\'zadd\',ARGV[1]..\'bkid:\'..ARGV[3]..\':children\',bkid,bkid)
 		redis.call(\'hmset\',ARGV[1]..\'bkid:\'..bkid..\':bkinfo\',\'pid\',ARGV[3],\'bkid\',bkid,\'is_bk\',ARGV[5],\'is_open\',ARGV[6],\'need_login\',ARGV[7],\'bkname\',ARGV[4],\'bk_alt\',ARGV[4]..\'....\',\'create_time\',ARGV[2])
 		return bkid';
-		return $redis->eval($lua,array($tablePre,time(),$pid,$bkname,($isBk ? '1' : '0'),($isOpen ? '1' : '0'),($needLogin ? '1' : '0')));
+		return $redis->eval ( $lua, array (
+				$tablePre,
+				time (),
+				$pid,
+				$bkname,
+				($isBk ? '1' : '0'),
+				($isOpen ? '1' : '0'),
+				($needLogin ? '1' : '0') 
+		) );
+	}
+	/**
+	 * 判断节点id是否存在
+	 *
+	 * @param int $bkid
+	 *        	板块id
+	 * @return boolean
+	 */
+	public function bkIdExists($bkid) {
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return $this->bkIdExistsM ( $bkid );
+		elseif ($this->dbType == BaseController::DB_REDIS)
+			return $this->bkIdExistsR ( $bkid );
+	}
+	/**
+	 *
+	 * @todo
+	 *
+	 */
+	private function bkIdExistsM($bkid) {
+	}
+	private function bkIdExistsR($bkid) {
+		if ($bkid == 0)
+			return true;
+		$redis = $this->redis;
+		$tablePre = $this->tablePre;
+		return $redis->exists ( $tablePre . 'bkid:' . $bkid . ':bkinfo' );
 	}
 	/**
 	 * 获取节点的信息
@@ -95,6 +130,37 @@ class BkModel {
 			return $redis->hMget ( $keyStr, $field );
 	}
 	/**
+	 * 判断一个节点是否拥有子节点
+	 *
+	 * @param int $bkid
+	 *        	节点id
+	 * @return boolean
+	 */
+	public function hasChildBk($bkid) {
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return $this->hasChildBkM ( $bkid );
+		elseif ($this->dbType == BaseController::DB_REDIS)
+			return $this->hasChildBkR ( $bkid );
+	}
+	/**
+	 *
+	 * @todo
+	 *
+	 */
+	private function hasChildBkM($bkid) {
+	}
+	private function hasChildBkR($bkid) {
+		$redis = $this->redis;
+		$tablePre = $this->tablePre;
+		$keyStr = $tablePre . 'bkid:' . $bkid . ':children';
+		if (! $redis->exists ( $keyStr ))
+			return false;
+		else {
+			$tmpArr = $redis->zRange ( $keyStr, 0, 0 );
+			return (! empty ( $tmpArr ));
+		}
+	}
+	/**
 	 * 获取下级节点id列表
 	 *
 	 * @param int $bkid
@@ -120,34 +186,36 @@ class BkModel {
 		$redis = $this->redis;
 		$tablePre = $this->tablePre;
 		$keyStr = $tablePre . 'bkid:' . $bkid . ':children';
-		if(!$redis->exists($keyStr))
-			return array();
-		if($limit == 0)
+		if (! $redis->exists ( $keyStr ))
+			return array ();
+		if ($limit == 0)
 			return $redis->zRange ( $keyStr, 0, - 1 );
 		else
 			return $redis->zRange ( $keyStr, 0, $limit - 1 );
 	}
 	/**
 	 * 将板块节点加入到首页导航处
-	 * 
-	 * @param int $bkid 节点id
+	 *
+	 * @param int $bkid
+	 *        	节点id
 	 * @return void
 	 */
-	public function addBk2Index($bkid){
+	public function addBk2Index($bkid) {
 		if ($this->dbType == BaseController::DB_MYSQL)
-			$this->addBk2IndexM($bkid);
+			$this->addBk2IndexM ( $bkid );
 		elseif ($this->dbType == BaseController::DB_REDIS)
-			$this->addBk2IndexR($bkid);		
+			$this->addBk2IndexR ( $bkid );
 	}
 	/**
-	 * @todo 
+	 *
+	 * @todo
+	 *
 	 */
-	private function addBk2IndexM($bkid){
-		
+	private function addBk2IndexM($bkid) {
 	}
-	private function addBk2IndexR($bkid){
+	private function addBk2IndexR($bkid) {
 		$redis = $this->redis;
 		$tablePre = $this->tablePre;
-		$redis->zAdd($tablePre . 'index_bkids',$bkid,$bkid);
+		$redis->zAdd ( $tablePre . 'index_bkids', $bkid, $bkid );
 	}
 }

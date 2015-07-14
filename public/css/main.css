@@ -690,3 +690,55 @@ a.list-group-item{
 	color: #fff;
     background-color: #337ab7;
 }
+/*分页*/
+.fenye_div{
+	border-top: 1px solid #e2e2e2;
+	text-align: center;
+}
+.page_current {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 5px 8px 5px 8px;
+    background-color: #f0f0f0;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin: 0px 2px 0px 2px;
+    border: 1px solid #bbb;
+    color: #000;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.page_normal:link, .page_normal:visited, .page_normal:active {
+    display: inline-block;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 13px;
+    padding: 3px 6px 3px 6px;
+    background-color: #fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin: 0px 2px 0px 2px;
+    text-decoration: none;
+    border: 1px solid #e2e2e2;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.page_normal:hover {
+    display: inline-block;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 13px;
+    padding: 3px 6px 3px 6px;
+    background-color: #f0f0f0;
+    color: #000;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin: 0px 2px 0px 2px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+}

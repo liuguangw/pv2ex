@@ -1,4 +1,10 @@
 <!--{include /widget/userinfo.html}-->
+<!--{eval 
+			$cssList = array (
+					'/public/css/font-awesome.min.css',
+					'/public/css/zTreeStyle/zTreeStyle.css',
+					'/public/css/main.css'
+		);}-->
 <!--{include /inc/header.html}-->
 <div id="Top">
 	<div class="content">
@@ -40,6 +46,7 @@
 </div>
 <!--{include /inc/bottom.html}-->
 <!--{include /jslib/jquery.html}-->
+<script type="text/javascript" src="/public/js/jquery.ztree.all-3.5.min.js"></script>
 <script type="text/javascript" src="/public/js/admin.js"></script>
 <script type="text/javascript">
 var dbTypeStr="{$dbTypeStr}",
