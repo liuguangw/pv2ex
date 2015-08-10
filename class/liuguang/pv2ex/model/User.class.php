@@ -393,4 +393,42 @@ class User {
 		else
 			return $redis->hMget ( $skey, $field );
 	}
+	/**
+	 * 根据用户名获取用户的id
+	 * 
+	 * @param string $username
+	 * @return int
+	 */
+	public function getUsernameUid($username){
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return $this->getUsernameUidM($username);
+		elseif ($this->dbType == BaseController::DB_REDIS)
+		return $this->getUsernameUidR($username);
+	}
+	private function getUsernameUidM($username) {
+	}
+
+	private function getUsernameUidR($username) {
+		$redis = $this->redis;
+		return $redis->hGet($this->tablePre.'username_uids',$username);
+	}
+	/**
+	 * 根据邮箱获取用户的id
+	 * 
+	 * @param string $email
+	 * @return int
+	 */
+	public function getEmailUid($email){
+		if ($this->dbType == BaseController::DB_MYSQL)
+			return $this->getEmailUidM($email);
+		elseif ($this->dbType == BaseController::DB_REDIS)
+		return $this->getEmailUidR($email);
+	}
+	private function getEmailUidM($email) {
+	}
+
+	private function getEmailUidR($email) {
+		$redis = $this->redis;
+		return $redis->hGet($this->tablePre.'email_uids',$email);
+	}
 }

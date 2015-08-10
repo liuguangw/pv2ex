@@ -28,4 +28,4 @@ $config ['table_pre'] = 'pv2ex_';
 $config ['redis_host'] = '127.0.0.1';
 $config ['redis_port'] = 6379;
 $config ['redis_pass'] = 'root';
-$config ['appinit'] =true;
+$config ['appinit'] =false;

@@ -46,6 +46,29 @@ class SiteModel {
 			return $redis->hMget ( $tablePre . 'site_conf', $fields );
 	}
 	/**
+	 * 修改站点配置
+	 *
+	 * @return void
+	 */
+	public function updateSiteInfo($newSets) {
+		if ($this->dbType == BaseController::DB_MYSQL)
+			$this->updateSiteInfoM ( $newSets );
+		elseif ($this->dbType == BaseController::DB_REDIS)
+			$this->updateSiteInfoR ( $newSets );
+	}
+	/**
+	 *
+	 * @todo
+	 *
+	 */
+	public function updateSiteInfoM($newSets) {
+	}
+	public function updateSiteInfoR($newSets) {
+		$redis = $this->redis;
+		$tablePre = $this->tablePre;
+		$redis->hMset($tablePre . 'site_conf' ,$newSets);
+	}
+	/**
 	 * 获取数据库服务器状态
 	 *
 	 * @return array

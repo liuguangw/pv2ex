@@ -1,0 +1,75 @@
+.fui-clearfix {zoom:1;}
+.fui-clearfix:after {display:block;visibility:hidden;font-size:0;height:0;content:" ";clear:both;}
+
+.fui-dialog { color:#333; font:12px normal Arial,Helvetica,sans-serif; text-align:left;}
+.fdialog-html { height:100%; width:100%;}
+.fdialog-shade {}
+.fdialog-button { cursor:pointer; display:block; float:left;}
+.fdialog-button.disabled { cursor:default;}
+.fdialog-loading { width:100%; height:100%; border:0; padding:0; margin:0; top:0; left:0; background:url(../imgs/loading-image.gif) no-repeat center center #fff; display:none; opacity:0.7; filter:alpha(opacity=70);}
+.fdialog-content {}
+.fdialog-button {outline:none;}
+.fdialog-closable { z-index:100; cursor:pointer;}
+
+.fdialog-module-string .fdialog-content { overflow-y:auto;}
+.fdialog-module-ajax .fdialog-content { overflow-y:auto;}
+.fdialog-module-html .fdialog-content { background-color:none;}
+
+.fdialog-tool, .fdialog-tool-remove { cursor:pointer; display:block; float:left;}
+.fdialog-tool.disabled { cursor:default;}
+
+.fdialog-theme-default {}
+.fdialog-theme-default .fdialog-panel { border:1px solid #ccc;}
+
+.fdialog-theme-default .fdialog-content { background-color:#fff;}
+
+.fdialog-theme-default .fdialog-header { background:#eaeaea; background-image:none,linear-gradient(to bottom,#f6f6f6 0,#eaeaea 100%); background-position:50% 50%; border-bottom:1px solid #ccc; height:40px; line-height:40px;}
+.fdialog-theme-default .fdialog-title { padding:10px 10px; font-size:12px; height:20px; line-height:20px; float:left;}
+.fdialog-theme-default .fdialog-tools { padding:10px 10px; height:20px; line-height:20px; float:right;}
+.fdialog-theme-default .fdialog-title-icon { width:16px; height:20px; display:block; float:left; margin-right:5px;}
+
+.fdialog-theme-default .fdialog-tool { width:20px; height:20px; margin-left:5px;}
+.fdialog-theme-default .fdialog-tool-remove { background:url(../imgs/remove.png) no-repeat center center; width:20px; height:20px; margin-left:5px;}
+
+.fdialog-theme-default .fdialog-footer { border-top:1px solid #ccc; padding:10px; background-color:#f3f3f3;}
+.fdialog-theme-default .fdialog-message { float:left; width:auto; line-height:30px; color:#999;}
+.fdialog-theme-default .fdialog-buttons { float:right;}
+
+.fdialog-theme-default .fdialog-button { margin-left:10px; height:30px; line-height:30px; border-radius:2px; background-color:#5bc0de; color:#fff; padding:0 15px;}
+
+.fdialog-theme-default .fdialog-button.gray { background-color:#bbb; color:#f9f9f9;}
+.fdialog-theme-default .fdialog-button.success { background-color:green; color:#ffffff;}
+
+.fdialog-theme-default .fdialog-button.hover { opacity:0.7;}
+.fdialog-theme-default .fdialog-button.disabled { opacity:0.5;}
+
+.fdialog-theme-default .fdialog-module-ajax .fdialog-loading { height:30px; line-height:30px; background:url(../imgs/loading.gif) no-repeat 10px center #fff; width:auto; padding:0 34px;}
+
+
+
+
+
+/* alert and message */
+.fdialog-theme-default .fdialog-module-alert .fdialog-content { padding:20px;}
+.fdialog-theme-default .fdialog-icon-box { float:left; height:42px; width:32px; margin-right:20px;}
+.fdialog-theme-default .fdialog-icon {background:url(../imgs/fdialog_alert.png) no-repeat left top; _background:url(../imgs/fdialog_alert_ie6.gif) no-repeat left top; height:42px; width:32px;}
+.fdialog-theme-default .fdialog-module-content { float:left; font-size:14px; line-height:22px;}
+.fdialog-theme-default .fdialog-module-content h5 { font-size:14px; font-weight:400; margin:0; padding:0; height:22px; line-height:22px;}
+.fdialog-theme-default .fdialog-module-content p {margin:0; padding:0; color:#999; font-size:12px;}
+
+.fdialog-theme-default .fdialog-icon.success { background-position:-72px top; }
+.fdialog-theme-default .fdialog-icon.wrong { background-position:-108px top; }
+.fdialog-theme-default .fdialog-icon.info {}
+.fdialog-theme-default .fdialog-icon.question { background-position:-36px top;}
+.fdialog-theme-default .fdialog-icon.error { background-position:-144px top;}
+.fdialog-theme-default .fdialog-icon.loading { background:url(../imgs/loading32.gif) no-repeat left top;}
+
+
+.fdialog-theme-default .fdialog-module-message { border:5px solid #ddd;}
+.fdialog-theme-default .fdialog-module-message .fdialog-content { padding:15px 20px 15px 15px; background-color:#f9f9f9;}
+.fdialog-theme-default .fdialog-module-message .fdialog-module-content { line-height:32px;}
+.fdialog-theme-default .fdialog-module-message .fdialog-html {background-color:#f9f9f9;}
+.fdialog-theme-default .fdialog-module-message  .fdialog-icon-box { height:32px;  margin-right:15px;}
+.fdialog-theme-default .fdialog-module-message  .fdialog-icon { height:32px;}
+.fdialog-theme-default .fdialog-module-message .fdialog-closable, .fdialog-theme-default .fdialog-module-html .fdialog-closable { position:absolute; top:-15px; right:-15px; z-index:10; background:url(../imgs/close.png) no-repeat left center; _background:url(../imgs/close_ie6.gif) no-repeat left center; height:30px; width:30px;}
+
